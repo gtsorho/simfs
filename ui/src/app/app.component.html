@@ -1,0 +1,116 @@
+<div [ngClass]="isDarkMode ? 'dark' : ''">
+  <app-navbar></app-navbar>
+  <router-outlet></router-outlet>
+  <app-footer></app-footer>
+</div>
+
+
+
+
+<!-- component
+<div class="p-5 text-xs">
+  <div class="mt-8 p-4">
+      <div>
+        <div class=" flex items-center justify-center w-full ">
+          <div class="bg-white  shadow-md rounded-lg px-8 w-3/4 py-6">
+            <div class="mx-4 p-4  mb-10">
+              <div class="flex items-center mx-auto  max-w-md">
+                  <div class="flex items-center text-teal-600 relative">
+                    <i class="absolute -ml-12 text-center -mt-16 w-32 text-lg  text-teal-600 fa-brands fa-pagelines"></i>
+                      <div class="rounded-full transition duration-500 ease-in-out h-8 w-8 py-1.5 px-2.5 border-2 bg-teal-600 text-white border-teal-600">
+                          <i class="mx-auto fa-solid fa-check text-md"></i>
+                      </div>
+                      <div class="absolute top-0 -ml-12 text-center mt-9 w-32 text-xs font-medium uppercase text-teal-600">Eco | Chain</div>
+                  </div>
+                  <div class="flex-auto border-t-2 transition duration-500 ease-in-out border-teal-600"></div>
+                  <div class="flex items-center text-teal-600 relative">
+                      <i class="absolute -ml-12 text-center -mt-16 w-32 text-lg  text-teal-600 fa-regular fa-lightbulb"></i>
+                      <div class="rounded-full transition duration-500 ease-in-out h-8 w-8 py-1.5 px-2.5 border-2 border-teal-600">
+                        <i class="mx-auto fa-solid fa-check text-md"></i>
+                      </div>
+                      <div class="absolute top-0 -ml-12 text-center mt-9 w-32 text-xs font-medium uppercase text-teal-600">MFS</div>
+                  </div>
+                  <div class="flex-auto border-t-2 transition duration-500 ease-in-out border-gray-300"></div>
+                  <div class="flex items-center text-teal-600 relative">
+                    <i class="absolute -ml-11 text-center -mt-16 w-32  text-lg  text-teal-600 fa-solid fa-person-digging"></i>
+                    <div class="rounded-full transition duration-500 ease-in-out h-8 w-8 py-1.5 px-2.5 border-2 border-teal-600">
+                      <i class="mx-auto fa-solid fa-check text-md"></i>
+                    </div>
+                    <div class="absolute top-0 -ml-12 text-center mt-9 w-32 text-xs font-medium uppercase text-teal-600">Farmer</div>
+                </div>
+              </div>
+            </div>
+            <form >
+              <div *ngIf="step == 1" class="border-b border-gray-900/10 pb-12">
+                <h2 class="text-base font-semibold leading-7 text-gray-900">Ecological Region & Value Chain</h2>
+                <p class="mt-1 text-sm leading-6 text-gray-600">Use a permanent address where you can receive mail.</p>
+          
+                <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                  <div class="sm:col-span-3">
+                    <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Region</label>
+                    <div class="mt-2">
+                      <select id="country" name="country" autocomplete="country-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6">
+                        <option>United States</option>
+                        <option>Canada</option>
+                        <option>Mexico</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="sm:col-span-3">
+                    <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Value Chain</label>
+                    <div class="mt-2">
+                      <select id="country" name="country" autocomplete="country-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6">
+                        <option>United States</option>
+                        <option>Canada</option>
+                        <option>Mexico</option>
+                      </select>
+                    </div>
+                  </div>   
+                </div>
+              </div>
+              <div *ngIf="step == 2" class="border-b border-gray-900/10 pb-12">
+                <h2 class="text-base font-semibold leading-7 text-gray-900">Ecological Region & Value Chain</h2>
+                <p class="mt-1 text-sm leading-6 text-gray-600">Use a permanent address where you can receive mail.</p>
+          
+                <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                  <div class="sm:col-span-3">
+                    <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Region</label>
+                    <div class="mt-2">
+                      <select id="country" name="country" autocomplete="country-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6">
+                        <option>United States</option>
+                        <option>Canada</option>
+                        <option>Mexico</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="sm:col-span-3">
+                    <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Value Chain</label>
+                    <div class="mt-2">
+                      <select id="country" name="country" autocomplete="country-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6">
+                        <option>United States</option>
+                        <option>Canada</option>
+                        <option>Mexico</option>
+                      </select>
+                    </div>
+                  </div>   
+                </div>
+              </div>
+            </form>
+            <div class="flex p-2 mt-4">
+              <button class="hover:scale-110 focus:outline-none  px-3 py-1 rounded font-bold cursor-pointer 
+          hover:bg-gray-200  
+          bg-gray-100 
+          text-gray-700 
+          border ">Previous</button>
+              <div class="flex-auto flex flex-row-reverse">
+                  <button class=" ml-2  hover:scale-110 focus:outline-none  px-3 py-2 rounded font-bold cursor-pointer 
+          hover:bg-teal-600  
+          bg-teal-600 
+          text-teal-100">Next</button>
+              </div>
+          </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div> -->

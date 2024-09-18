@@ -1,0 +1,13 @@
+.image-container {
+    perspective: 1000px;
+  }
+  .skewed {
+    transform: skewX(-10deg);
+    overflow: hidden;
+  }
+  .skewed img {
+    transform: skewX(10deg);
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }

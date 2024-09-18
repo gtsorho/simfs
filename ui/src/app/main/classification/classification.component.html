@@ -1,0 +1,358 @@
+<!-- component -->
+<div class="p-5 text-xs dark:bg-gray-900 min-h-screen flex items-center pt-20" *ngIf="!isLoader && !isMfsResult">
+    <div class="mt-8 p-4 w-full">
+        <div class="flex items-center justify-center w-full">
+            <div class="bg-slate-50 dark:bg-gray-800 shadow-md rounded-lg px-8 w-full lg:w-3/4 py-6">
+
+                <!-- Step Indicators -->
+                <div class="mx-4 p-4 mb-10">
+                    <div class="flex items-center mx-auto max-w-md">
+
+                        <!-- Step 1 Indicator -->
+                        <div class="flex items-center text-teal-600 relative">
+                            <i
+                                class="absolute -ml-12 text-center -mt-16 w-32 text-lg text-teal-600 fa-brands fa-pagelines"></i>
+                            <div class="rounded-full transition duration-500 ease-in-out h-8 w-8 py-1.5 px-2.5 border-2"
+                                [ngClass]="{'bg-teal-600 text-white': step >= 1, 'border-teal-600': step >= 1}">
+                                <i class="mx-auto fa-solid fa-check text-md"></i>
+                            </div>
+                            <div
+                                class="absolute top-0 -ml-12 text-center mt-9 w-32 text-xs font-medium uppercase text-teal-600">
+                                Eco | Chain
+                            </div>
+                        </div>
+
+                        <!-- Divider -->
+                        <div class="flex-auto border-t-2 transition duration-500 ease-in-out"
+                            [ngClass]="{'border-teal-600': step > 1, 'border-gray-300': step < 1}"></div>
+
+                        <!-- Step 2 Indicator -->
+                        <div class="flex items-center text-teal-600 relative">
+                            <i
+                                class="absolute -ml-12 text-center -mt-16 w-32 text-lg text-teal-600 fa-regular fa-lightbulb"></i>
+                            <div class="rounded-full transition duration-500 ease-in-out h-8 w-8 py-1.5 px-2.5 border-2"
+                                [ngClass]="{'bg-teal-600 text-white': step >= 2, 'border-teal-600': step >= 2}">
+                                <i class="mx-auto fa-solid fa-check text-md"></i>
+                            </div>
+                            <div
+                                class="absolute top-0 -ml-12 text-center mt-9 w-32 text-xs font-medium uppercase text-teal-600">
+                                MFS
+                            </div>
+                        </div>
+
+                        <!-- Divider -->
+                        <div class="flex-auto border-t-2 transition duration-500 ease-in-out"
+                            [ngClass]="{'border-teal-600': step > 2, 'border-gray-300': step < 2}"></div>
+
+                        <!-- Step 3 Indicator -->
+                        <div class="flex items-center text-teal-600 relative">
+                            <i
+                                class="absolute -ml-11 text-center -mt-16 w-32 text-lg text-teal-600 fa-solid fa-person-digging"></i>
+                            <div class="rounded-full transition duration-500 ease-in-out h-8 w-8 py-1.5 px-2.5 border-2"
+                                [ngClass]="{'bg-teal-600 text-white': step == 3, 'border-teal-600': step == 3}">
+                                <i class="mx-auto fa-solid fa-check text-md"></i>
+                            </div>
+                            <div
+                                class="absolute top-0 -ml-12 text-center mt-9 w-32 text-xs font-medium uppercase text-teal-600">
+                                Farmer
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step Forms -->
+                <form>
+                    <!-- Step 1 -->
+                    <div *ngIf="step === 1" class="border-b border-gray-900/10 pb-12">
+                        <h2 class="text-base font-semibold leading-7 dark:text-white text-gray-900">Ecological Region &
+                            Value Chain</h2>
+                            <section id="">
+                                <!-- Region selection (only one region can be selected) -->
+                                <span *ngIf="stepEco == 1">
+                                  <h3 class="text-lg font-medium dark:text-white">Select your Region</h3>
+                                  <div class="mb-4 text-start dark:text-white">
+                                    <a *ngFor="let region of regionsOfGhana"
+                                      type="button"
+                                      class="my-2 mx-1 inline-block rounded-full px-4 pb-1 pt-1.5 text-xs font-medium uppercase leading-normal shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-0 active:shadow-lg dark:text-neutral-200"
+                                      [ngClass]="{
+                                        'bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-600 dark:hover:bg-neutral-500 active:bg-neutral-400': selectedRegion !== region,
+                                        'bg-teal-600 text-white': selectedRegion === region
+                                      }"
+                                      (click)="selectRegion(region)">
+                                      {{ region.name }}
+                                    </a>
+                                  </div>
+                                </span>
+                              
+                                <!-- Crop selection (multiple crops can be selected) -->
+                                <span *ngIf="stepEco == 2">
+                                  <h3 class="text-lg font-medium dark:text-white">Select Crops:</h3>
+                                  <div class="mb-4 text-start dark:text-white">
+                                    <a *ngFor="let crop of farmCrops"
+                                      type="button"
+                                      class="my-2 mx-1 inline-block rounded-full px-4 pb-1 pt-1.5 text-xs font-medium uppercase leading-normal shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-0 active:shadow-lg dark:text-neutral-200"
+                                      [ngClass]="{
+                                        'bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-600 dark:hover:bg-neutral-500 active:bg-neutral-400': !selectedCrops.includes(crop),
+                                        'bg-teal-600 text-white': selectedCrops.includes(crop)
+                                      }"
+                                      (click)="toggleCropSelection(crop)">
+                                      {{ crop.name }}
+                                    </a>
+                                  </div>
+                                </span>
+                              
+                                <!-- Farm animals selection (multiple animals can be selected) -->
+                                <span *ngIf="stepEco == 3">
+                                  <h3 class="text-lg font-medium dark:text-white">Select Farm Animals</h3>
+                                  <div class="mb-4 text-start dark:text-white">
+                                    <a *ngFor="let animal of farmAnimals"
+                                      type="button"
+                                      class="my-2 mx-1 inline-block rounded-full px-4 pb-1 pt-1.5 text-xs font-medium uppercase leading-normal shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-0 active:shadow-lg dark:text-neutral-200"
+                                      [ngClass]="{
+                                        'bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-600 dark:hover:bg-neutral-500 active:bg-neutral-400': !selectedAnimals.includes(animal),
+                                        'bg-teal-600 text-white': selectedAnimals.includes(animal)
+                                      }"
+                                      (click)="toggleAnimalSelection(animal)">
+                                      {{ animal.name }}
+                                    </a>
+                                  </div>
+                                </span>
+                              </section>
+                              
+                    </div>
+
+                    <div *ngIf="step === 2" class="border-b border-gray-900/10 pb-12 ">
+                        <h2 class="text-base font-semibold leading-7 dark:text-white text-gray-900">Farm Typology
+                            Selection</h2>
+                        <p class="mt-1 text-sm leading-6 text-gray-600">Tell us more about your services.</p>
+                        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+
+                            <div class="sm:col-span-1">
+                                <label for="first-name"
+                                    class="block text-sm font-medium leading-6 dark:text-white text-gray-900">Household
+                                    size</label>
+                                <div class="mt-2">
+                                    <input type="text" name="first-name" id="first-name" autocomplete="given-name"
+                                        class="block w-full rounded-md border-0 py-1 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6">
+                                </div>
+                            </div>
+
+                            <div class="sm:col-span-1">
+                                <label for="last-name"
+                                    class="block text-sm font-medium leading-6 dark:text-white text-gray-900">Livestock
+                                    diversity</label>
+                                <div class="mt-2">
+                                    <input type="text" name="last-name" id="last-name" autocomplete="family-name"
+                                        class="block w-full rounded-md border-0 py-1 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6">
+                                </div>
+                            </div>
+
+                            <div class="sm:col-span-1">
+                                <label for="email"
+                                    class="block text-sm font-medium leading-6 dark:text-white text-gray-900">Crop yield
+                                    (t/ha)</label>
+                                <div class="mt-2">
+                                    <input id="email" name="email" type="text" autocomplete="email"
+                                        class="block w-full rounded-md border-0 py-1 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6">
+                                </div>
+                            </div>
+
+                            <div class="sm:col-span-3">
+                                <label for="country"
+                                    class="block text-sm font-medium leading-6 dark:text-white text-gray-900">Livestock
+                                    Types</label>
+                                <div class="mt-2">
+                                    <select id="country" name="country" autocomplete="country-name"
+                                        class="block w-full rounded-md border-0 py-1.5 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6">
+                                        <option>Large ruminant</option>
+                                        <option>Small ruminant</option>
+                                        <option>Pigs</option>
+                                        <option>Poultry</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="sm:col-span-3">
+                                <label for="country"
+                                    class="block text-sm font-medium leading-6 dark:text-white text-gray-900">Livestock
+                                    Types</label>
+                                <div class="mt-2">
+                                    <select id="country" name="country" autocomplete="country-name"
+                                        class="block w-full rounded-md border-0 py-1.5 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6">
+                                        <option>Crop-cattle</option>
+                                        <option>Crop-small ruminant</option>
+                                        <option>Crop-poultry</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-span-1">
+                                <label for="street-address"
+                                    class="block text-sm font-medium leading-6 dark:text-white text-gray-900">Parcel of
+                                    land</label>
+                                <div class="mt-2">
+                                    <input type="text" name="street-address" id="street-address"
+                                        autocomplete="street-address"
+                                        class="block w-full rounded-md border-0 py-1 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6">
+                                </div>
+                            </div>
+
+                            <div class="sm:col-span-1">
+                                <label for="city"
+                                    class="block text-sm font-medium leading-6 dark:text-white text-gray-900">Land size
+                                    (ha)</label>
+                                <div class="mt-2">
+                                    <input type="text" name="city" id="city" autocomplete="address-level2"
+                                        class="block w-full rounded-md border-0 py-1 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6">
+                                </div>
+                            </div>
+
+                            <div class="sm:col-span-1">
+                                <label for="region"
+                                    class="block text-sm font-medium leading-6 dark:text-white text-gray-900">Livestock
+                                    holding (TLU)</label>
+                                <div class="mt-2">
+                                    <input type="text" name="region" id="region" autocomplete="address-level1"
+                                        class="block w-full rounded-md border-0 py-1 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6">
+                                </div>
+                            </div>
+                            <div class="sm:col-span-1">
+                                <label for="region"
+                                    class="block text-sm font-medium leading-6 dark:text-white text-gray-900">No. fruit
+                                    trees</label>
+                                <div class="mt-2">
+                                    <input type="text" name="region" id="region" autocomplete="address-level1"
+                                        class="block w-full rounded-md border-0 py-1 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6">
+                                </div>
+                            </div>
+
+                            <div class="sm:col-span-1">
+                                <label for="postal-code"
+                                    class="block text-sm font-medium leading-6 dark:text-white text-gray-900">No.
+                                    trees</label>
+                                <div class="mt-2">
+                                    <input type="text" name="postal-code" id="postal-code" autocomplete="postal-code"
+                                        class="block w-full rounded-md border-0 py-1 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="step === 3" class="border-b border-gray-900/10 pb-12">
+                        <h2 class="text-base font-semibold leading-7 dark:text-white text-gray-900">Farmer Information
+                        </h2>
+                        <p class="mt-1 text-sm leading-6 text-gray-600">Provide details Your Details.</p>
+                        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+
+                            <div class="sm:col-span-3">
+                                <label for="first-name"
+                                    class="block text-sm font-medium leading-6 dark:text-white text-gray-900">Name</label>
+                                <div class="mt-2">
+                                    <input type="text" name="first-name" id="first-name" autocomplete="given-name"
+                                        class="block w-full rounded-md border-0 py-1 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6">
+                                </div>
+                            </div>
+
+                            <div class="sm:col-span-3">
+                                <label for="last-name"
+                                    class="block text-sm font-medium leading-6 dark:text-white text-gray-900">Phone
+                                    Number</label>
+                                <div class="mt-2">
+                                    <input type="text" name="last-name" id="last-name" autocomplete="family-name"
+                                        class="block w-full rounded-md border-0 py-1 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6">
+                                </div>
+                            </div>
+
+
+                            <div class="sm:col-span-3">
+                                <div class="border-b border-gray-900/10 pb-12">
+                                    <h2 class="block text-sm font-medium leading-6 dark:text-white text-gray-900">Notify
+                                        Me(SMS)</h2>
+
+                                    <div class="mt-1 space-y-10">
+                                        <fieldset>
+                                            <div class="mt-0 space-y-6">
+                                                <div class="relative flex gap-x-3">
+                                                    <div class="flex h-6 items-center">
+                                                        <input id="comments" name="comments" type="checkbox"
+                                                            class="h-4 w-4 rounded border-gray-300 text-teal-600 focus:ring-teal-600 checked:bg-teal-600 checked:border-teal-600">
+                                                    </div>
+                                                    <div class="text-sm leading-6">
+                                                        <label for="comments"
+                                                            class="font-medium dark:text-white text-gray-900">Yes,
+                                                            Notify me</label>
+                                                        <p class="text-gray-500">You'll get notified about MFS related
+                                                            advisories</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <div class=" p-2 mt-4">
+                    <div class="flex" *ngIf="stepEco <= 3">
+                        <button (click)="previousStepEco()"
+                            class="hover:scale-110 focus:outline-none px-3 py-1 rounded font-bold cursor-pointer hover:bg-gray-200 bg-gray-100 text-gray-700 border"
+                            [disabled]="stepEco === 1">Previous</button>
+                        <div class="flex-auto flex flex-row-reverse" *ngIf="step < 3">
+                            <button (click)="nextStepEco()"
+                                class="ml-2 hover:scale-110 focus:outline-none px-3 py-2 rounded font-bold cursor-pointer hover:bg-teal-600 bg-teal-600 text-teal-100">Next</button>
+                        </div>
+                    </div >
+                    <div class="flex" *ngIf="step > 1">
+                        <button (click)="previousStep()"
+                            class="hover:scale-110 focus:outline-none px-3 py-1 rounded font-bold cursor-pointer hover:bg-gray-200 bg-gray-100 text-gray-700 border"
+                            [disabled]="step === 1">Previous</button>
+                        <div class="flex-auto flex flex-row-reverse" *ngIf="step < 3">
+                            <button (click)="nextStep()"
+                                class="ml-2 hover:scale-110 focus:outline-none px-3 py-2 rounded font-bold cursor-pointer hover:bg-teal-600 bg-teal-600 text-teal-100">Next</button>
+                        </div>
+                        <div class="flex-auto flex flex-row-reverse" *ngIf="step >= 3">
+                            <button (click)="submitForm()"
+                                class="ml-2 hover:scale-110 focus:outline-none px-3 py-2 rounded font-bold cursor-pointer hover:bg-teal-600 bg-teal-600 text-teal-100">Finish</button>
+                        </div>
+                    </div >
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="p-5 text-xs dark:bg-gray-900 min-h-screen md:flex flex-col items-center justify-center pt-20 space-y-10" *ngIf="isMfsResult && !isLoader">
+    <!-- Content Section -->
+    <div class="h-96 w-full bg-gradient-to-tr from-teal-800 to-teal-200 rounded-lg md:flex items-center">
+        <div class="ml-5 sm:ml-20 w-full sm:w-80 my-10 text-center sm:text-left">
+            <h2 class="text-white text-3xl sm:text-4xl">COMPLETED</h2>
+            <p class="text-indigo-100 mt-4 capitalize font-thin tracking-wider leading-7">You  have successfully completed the MFS aggregation form. Click the Link below to view Advisories</p>
+
+            <a href="#" class="uppercase inline-block mt-8 text-sm bg-white py-2 px-4 rounded font-semibold hover:bg-indigo-100">View Classifications</a>
+        </div>
+            <!-- Image Section -->
+    <div class="image-container flex flex-col sm:flex-row overflow-hidden  w-full h-96 sm:h-64">
+        <!-- Image 1 -->
+        <div class="skewed w-full sm:w-1/3 h-1/3 sm:h-full">
+          <img src="../../../assets/1.jpg"  class="w-full h-full object-cover">
+        </div>
+        <!-- Image 2 with text overlay -->
+        <div class="skewed w-full sm:w-1/3 h-1/3 sm:h-full relative">
+          <img src="../../../assets/2.jpg"  class="w-full h-full object-cover">
+          <div class="absolute inset-0 flex items-center justify-center text-white text-xl sm:text-3xl font-semibold">
+            <span class="transform skewX(10deg)">MFS <br> - Farm Lift</span>
+          </div>
+        </div>
+        <!-- Image 3 -->
+        <div class="skewed w-full sm:w-1/3 h-1/3 sm:h-full">
+          <img src="../../../assets/3.jpg"  class="w-full h-full object-cover">
+        </div>
+    </div>
+    </div>
+</div>
+
+<div class=" min-h-screen flex items-center justify-center" *ngIf="isLoader">
+    <app-loader></app-loader>
+</div>
