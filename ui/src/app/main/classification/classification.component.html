@@ -86,37 +86,52 @@
                               
                                 <!-- Crop selection (multiple crops can be selected) -->
                                 <span *ngIf="stepEco == 2">
-                                  <h3 class="text-lg font-medium dark:text-white">Select Crops:</h3>
-                                  <div class="mb-4 text-start dark:text-white">
-                                    <a *ngFor="let crop of farmCrops"
-                                      type="button"
-                                      class="my-2 mx-1 inline-block rounded-full px-4 pb-1 pt-1.5 text-xs font-medium uppercase leading-normal shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-0 active:shadow-lg dark:text-neutral-200"
-                                      [ngClass]="{
-                                        'bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-600 dark:hover:bg-neutral-500 active:bg-neutral-400': !selectedCrops.includes(crop),
-                                        'bg-teal-600 text-white': selectedCrops.includes(crop)
-                                      }"
-                                      (click)="toggleCropSelection(crop)">
-                                      {{ crop.name }}
-                                    </a>
-                                  </div>
-                                </span>
+                                    <h3 class="text-lg font-medium dark:text-white">Select Crops:</h3>
+                                    <div class="mb-4 text-start dark:text-white">
+                                      <a *ngFor="let crop of farmCrops"
+                                        type="button"
+                                        class="my-2 mx-1 inline-block rounded-full px-4 pb-1 pt-1.5 text-xs font-medium uppercase leading-normal shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-0 active:shadow-lg dark:text-neutral-200"
+                                        [ngClass]="{
+                                          'bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-600 dark:hover:bg-neutral-500 active:bg-neutral-400': !isCropSelected(crop),
+                                          'bg-teal-600 text-white': isCropSelected(crop)
+                                        }"
+                                        >
+                                        <p class="inline" (click)="toggleCropSelection(crop)">{{ crop.name }}</p>
+                                        <input *ngIf="isCropSelected(crop)" [(ngModel)]="crop.quantities"
+                                          type="number"
+                                          name="qty"
+                                          min="0"
+                                          placeholder="5ha"
+                                          class="w-[70px] inline h-[25px] ms-2 rounded-full border-0 py-1 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6"
+                                          (input)="updateCropQuantity(crop, $event)">
+                                      </a>
+                                    </div>
+                                  </span>
+                                  
                               
                                 <!-- Farm animals selection (multiple animals can be selected) -->
                                 <span *ngIf="stepEco == 3">
-                                  <h3 class="text-lg font-medium dark:text-white">Select Farm Animals</h3>
-                                  <div class="mb-4 text-start dark:text-white">
-                                    <a *ngFor="let animal of farmAnimals"
-                                      type="button"
-                                      class="my-2 mx-1 inline-block rounded-full px-4 pb-1 pt-1.5 text-xs font-medium uppercase leading-normal shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-0 active:shadow-lg dark:text-neutral-200"
-                                      [ngClass]="{
-                                        'bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-600 dark:hover:bg-neutral-500 active:bg-neutral-400': !selectedAnimals.includes(animal),
-                                        'bg-teal-600 text-white': selectedAnimals.includes(animal)
-                                      }"
-                                      (click)="toggleAnimalSelection(animal)">
-                                      {{ animal.name }}
-                                    </a>
-                                  </div>
-                                </span>
+                                    <h3 class="text-lg font-medium dark:text-white">Select Farm Animals:</h3>
+                                    <div class="mb-4 text-start dark:text-white">
+                                      <a *ngFor="let animal of farmAnimals"
+                                        type="button"
+                                        class="my-2 mx-1 inline-block rounded-full px-4 pb-1 pt-1.5 text-xs font-medium uppercase leading-normal shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-0 active:shadow-lg dark:text-neutral-200"
+                                        [ngClass]="{
+                                          'bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-600 dark:hover:bg-neutral-500 active:bg-neutral-400': !isAnimalSelected(animal),
+                                          'bg-teal-600 text-white': isAnimalSelected(animal)
+                                        }"
+                                        >
+                                        <p class="inline" (click)="toggleAnimalSelection(animal)">{{ animal.name }}</p>
+                                        <input *ngIf="isAnimalSelected(animal)" [(ngModel)]="animal.quantities"
+                                          type="number"
+                                          name="qty"
+                                          min="0"
+                                          placeholder="5ha"
+                                          class="w-[70px] inline h-[25px] ms-2 rounded-full border-0 py-1 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6"
+                                          (input)="updateAnimalQuantity(animal, $event)">
+                                      </a>
+                                    </div>
+                                  </span>
                               </section>
                               
                     </div>
@@ -129,11 +144,9 @@
 
                             <div class="sm:col-span-1">
                                 <label for="first-name"
-                                    class="block text-sm font-medium leading-6 dark:text-white text-gray-900">Household
-                                    size</label>
+                                    class="block text-sm font-medium leading-6 dark:text-white text-gray-900">Household size</label>
                                 <div class="mt-2">
-                                    <input type="text" name="first-name" id="first-name" autocomplete="given-name"
-                                        class="block w-full rounded-md border-0 py-1 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6">
+                                    <input type="text" name="first-name" id="first-name" autocomplete="given-name"  class="block w-full rounded-md border-0 py-1 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
 
@@ -147,42 +160,15 @@
                                 </div>
                             </div>
 
-                            <div class="sm:col-span-1">
-                                <label for="email"
-                                    class="block text-sm font-medium leading-6 dark:text-white text-gray-900">Crop yield
-                                    (t/ha)</label>
-                                <div class="mt-2">
-                                    <input id="email" name="email" type="text" autocomplete="email"
-                                        class="block w-full rounded-md border-0 py-1 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6">
-                                </div>
-                            </div>
-
-                            <div class="sm:col-span-3">
-                                <label for="country"
-                                    class="block text-sm font-medium leading-6 dark:text-white text-gray-900">Livestock
-                                    Types</label>
-                                <div class="mt-2">
-                                    <select id="country" name="country" autocomplete="country-name"
-                                        class="block w-full rounded-md border-0 py-1.5 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6">
-                                        <option>Large ruminant</option>
-                                        <option>Small ruminant</option>
-                                        <option>Pigs</option>
-                                        <option>Poultry</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="sm:col-span-3">
-                                <label for="country"
-                                    class="block text-sm font-medium leading-6 dark:text-white text-gray-900">Livestock
-                                    Types</label>
-                                <div class="mt-2">
-                                    <select id="country" name="country" autocomplete="country-name"
-                                        class="block w-full rounded-md border-0 py-1.5 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6">
-                                        <option>Crop-cattle</option>
-                                        <option>Crop-small ruminant</option>
-                                        <option>Crop-poultry</option>
-                                    </select>
+                            <div>
+                                <div class="sm:col-span-1" *ngFor="let crop of selectedCrops">
+                                    <label for="email"
+                                        class="block text-sm font-medium leading-6 dark:text-white text-gray-900">{{crop.name}} yield
+                                        (t/ha)</label>
+                                    <div class="mt-2">
+                                        <input id="email" name="email" type="text" autocomplete="email"
+                                            class="block w-full rounded-md border-0 py-1 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6">
+                                    </div>
                                 </div>
                             </div>
 
@@ -197,15 +183,15 @@
                                 </div>
                             </div>
 
-                            <div class="sm:col-span-1">
-                                <label for="city"
-                                    class="block text-sm font-medium leading-6 dark:text-white text-gray-900">Land size
-                                    (ha)</label>
-                                <div class="mt-2">
-                                    <input type="text" name="city" id="city" autocomplete="address-level2"
-                                        class="block w-full rounded-md border-0 py-1 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6">
+                                <div class="sm:col-span-1" >
+                                    <label for="city"
+                                        class="block text-sm font-medium leading-6 dark:text-white text-gray-900">Land size
+                                        (ha)</label>
+                                    <div class="mt-2">
+                                        <input type="text" name="city" id="city" autocomplete="address-level2"
+                                            class="block w-full rounded-md border-0 py-1 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6">
+                                    </div>
                                 </div>
-                            </div>
 
                             <div class="sm:col-span-1">
                                 <label for="region"

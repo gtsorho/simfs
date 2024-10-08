@@ -120,20 +120,44 @@ export class ClassificationComponent {
   }
 
   toggleCropSelection(crop: any) {
-    const index = this.selectedCrops.indexOf(crop);
+    const index = this.selectedCrops.findIndex((c) => c.id === crop.id);
     if (index === -1) {
-      this.selectedCrops.push(crop);
+      this.selectedCrops.push({ ...crop, quantities: 0 });
     } else {
       this.selectedCrops.splice(index, 1);
     }
   }
+  
+  isCropSelected(crop: any): boolean {
+    return this.selectedCrops.some((c) => c.id === crop.id);
+  }
+  
+  updateCropQuantity(crop: any, event: Event) {
+    const quantity = (event.target as HTMLInputElement).value;
+    const selectedCrop = this.selectedCrops.find((c) => c.id === crop.id);
+    if (selectedCrop) {
+      selectedCrop.quantities = quantity;
+    }
+  }
 
   toggleAnimalSelection(animal: any) {
-    const index = this.selectedAnimals.indexOf(animal);
+    const index = this.selectedAnimals.findIndex((c) => c.id === animal.id);
     if (index === -1) {
-      this.selectedAnimals.push(animal);
+      this.selectedAnimals.push({ ...animal, quantities: 0 });
     } else {
       this.selectedAnimals.splice(index, 1);
+    }
+  }
+  
+  isAnimalSelected(animal: any): boolean {
+    return this.selectedAnimals.some((c) => c.id === animal.id);
+  }
+  
+  updateAnimalQuantity(animal: any, event: Event) {
+    const quantity = (event.target as HTMLInputElement).value;
+    const selectedAnimal = this.selectedAnimals.find((c) => c.id === animal.id);
+    if (selectedAnimal) {
+      selectedAnimal.quantities = quantity;
     }
   }
 }
