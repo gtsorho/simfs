@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LoaderComponent } from '../../components/loader/loader.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-classification',
   standalone: true,
-  imports: [CommonModule, FormsModule, LoaderComponent],
+  imports: [CommonModule, RouterLink, FormsModule, LoaderComponent],
   templateUrl: './classification.component.html',
   styleUrl: './classification.component.scss'
 })

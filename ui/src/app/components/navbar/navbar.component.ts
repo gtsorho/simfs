@@ -6,7 +6,7 @@ import { LoaderService } from '../../loader.service';
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule,RouterLink],
+  imports: [CommonModule, RouterLink],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })

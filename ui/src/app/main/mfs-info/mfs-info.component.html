@@ -1,78 +1,123 @@
 <div class="bg-gray-100 dark:bg-slate-700 py-20 text-xs">
     <!-- Container -->
     <div class="container mx-auto lg:px-60 md:px-32 px-4 py-16">
-        
+
         <div class="flex flex-col lg:flex-row justify-between text-center lg:text-left my-11">
             <div class="lg:w-5/12">
-                <h2 class="text-3xl font-bold">Your of MFS Typology Highlights:</h2>
+                <h2 class="text-3xl font-bold dark:text-white">Your of MFS Typology Highlights:</h2>
             </div>
             <div class="mt-6 lg:w-5/12 lg:mt-0">
-                <p class="text-gray-500">
+                <p class="text-gray-500  dark:text-white">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi egestas
                     Werat viverra id et aliquet. Vulputate egestas sollicitudin.
                 </p>
             </div>
         </div>
-        
+
 
         <!-- Cards Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Card 1 --> 
-            <div class="bg-[#4755698a] relative  dark:bg-slate-200  rounded-lg shadow-lg p-6 text-center"
-                [style.background-image]="'url(' + 'assets/5.jpg' + ')'"
-                [style.background-size]="'cover'"
-                [style.background-position]="'center'">
-                <div class="absolute inset-0 bg-black opacity-50"></div> 
-                <h2 class="text-2xl font-semibold mb-2 text-white">Live Caption</h2>
+        <!-- Cards Grid -->
+        <!-- Cards Container -->
+        <div class="flex flex-wrap justify-center gap-8">
+            <!-- Card 1 -->
+            <div class="flex-grow bg-[#4755698a] hover:scale-[1.02] ease-in-out duration-500 hover:shadow-2xl h-[2in] dark:bg-slate-200 
+                rounded-lg shadow-lg p-6 text-center"
+                [style.background-image]="'linear-gradient(to right, #4755698a, #4755698a), url(' + 'assets/3.jpg' + ')'"
+                [style.background-size]="'cover'" [style.background-position]="'center'">
+                <h2 class="text-2xl font-semibold mb-2 text-white">Crop - Cattle</h2>
                 <p class="text-gray-200">Lorem ipsum dolor sit amet consectetur, adipiscing elit.</p>
             </div>
 
             <!-- Card 2 -->
-            <div class="bg-[#4755698a] dark:bg-slate-200 rounded-lg shadow-lg p-6 text-center">
-                <div class="text-pink-500 mb-4">
-                    <svg class="w-8 h-8 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12H8m8 0a4 4 0 11-8 0 4 4 0 118 0z"></path></svg>
-                </div>
-                <h2 class="text-2xl font-semibold mb-2">Smart Reply</h2>
-                <p class="text-gray-500">Lorem ipsum dolor sit amet consectetur, adipiscing elit.</p>
+            <div class="flex-grow bg-[#4755698a] hover:scale-[1.02] ease-in-out duration-500 hover:shadow-2xl h-[2in] dark:bg-slate-200 rounded-lg shadow-lg p-6 text-center"
+                [style.background-image]="'linear-gradient(to right, #4755698a, #4755698a), url(' + 'assets/2.jpg' + ')'"
+                [style.background-size]="'cover'" [style.background-position]="'center'">
+                <h2 class="text-2xl font-semibold mb-2 text-white">Crop - Poultry</h2>
+                <p class="text-gray-200">Lorem ipsum dolor sit amet consectetur, adipiscing elit.</p>
             </div>
 
             <!-- Card 3 -->
-            <div class="bg-[#4755698a] dark:bg-slate-200 rounded-lg shadow-lg p-6 text-center">
-                <div class="text-pink-500 mb-4">
-                    <svg class="w-8 h-8 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11V9a3 3 0 10-6 0v2a3 3 0 10-6 0v3a9 9 0 0018 0v-3a3 3 0 00-6 0z"></path></svg>
-                </div>
-                <h2 class="text-2xl font-semibold mb-2">Sound Amplifier</h2>
-                <p class="text-gray-500">Lorem ipsum dolor sit amet consectetur, adipiscing elit.</p>
+            <div class="flex-grow bg-[#4755698a] hover:scale-[1.02] ease-in-out duration-500 hover:shadow-2xl h-[2in] dark:bg-slate-200 rounded-lg shadow-lg p-6 text-center"
+                [style.background-image]="'linear-gradient(to right, #4755698a, #4755698a), url(' + 'assets/4.jpg' + ')'"
+                [style.background-size]="'cover'" [style.background-position]="'center'">
+                <h2 class="text-2xl font-semibold mb-2 text-white">Crop – Small Ruminant</h2>
+                <p class="text-gray-200">Lorem ipsum dolor sit amet consectetur, adipiscing elit.</p>
             </div>
 
-            <!-- Card 4 -->
-            <div class="bg-[#4755698a] dark:bg-slate-200 rounded-lg shadow-lg p-6 text-center">
-                <div class="text-pink-500 mb-4">
-                    <svg class="w-8 h-8 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 12l-8-8m0 0h8m-8 0v8"></path></svg>
-                </div>
-                <h2 class="text-2xl font-semibold mb-2">Gesture Navigation</h2>
-                <p class="text-gray-500">Lorem ipsum dolor sit amet consectetur, adipiscing elit.</p>
-            </div>
-
-            <!-- Card 5 -->
-            <div class="bg-[#4755698a] dark:bg-slate-200 rounded-lg shadow-lg p-6 text-center">
-                <div class="text-pink-500 mb-4">
-                    <svg class="w-8 h-8 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 10a1 1 0 00-1 1v2a1 1 0 001 1h1a1 1 0 001-1v-2a1 1 0 00-1-1h-1z"></path></svg>
-                </div>
-                <h2 class="text-2xl font-semibold mb-2">Dark Theme</h2>
-                <p class="text-gray-500">Lorem ipsum dolor sit amet consectetur, adipiscing elit.</p>
-            </div>
-
-            <!-- Card 6 -->
-            <div class="bg-[#4755698a] dark:bg-slate-200 rounded-lg shadow-lg p-6 text-center">
-                <div class="text-pink-500 mb-4">
-                    <svg class="w-8 h-8 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9h4m-2 4h2m-4 0H4m16-4h-6"></path></svg>
-                </div>
-                <h2 class="text-2xl font-semibold mb-2">Privacy Controls</h2>
-                <p class="text-gray-500">Lorem ipsum dolor sit amet consectetur, adipiscing elit.</p>
-            </div>
-
-            <!-- Add more cards as needed -->
+            <!-- <div class="flex-grow bg-[#4755698a] hover:scale-[1.02] ease-in-out duration-500 hover:shadow-2xl h-[2in] dark:bg-slate-200 rounded-lg shadow-lg p-6 text-center"
+                [style.background-image]="'linear-gradient(to right, #4755698a, #4755698a), url(' + 'assets/1.jpg' + ')'"
+                [style.background-size]="'cover'" [style.background-position]="'center'">
+                <h2 class="text-2xl font-semibold mb-2 text-white">Crop – Small Ruminant</h2>
+                <p class="text-gray-200">Lorem ipsum dolor sit amet consectetur, adipiscing elit.</p>
+            </div> -->
         </div>
+        <div class="my-10 text-base">
+            <div>
+                <h2 class="text-2xl text-gray-900  dark:text-white font-bold md:text-4xl">Crop - Poultry</h2>
+                <p class="mt-6 text-gray-600  dark:text-slate-50   ">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum omnis
+                    voluptatem accusantium nemo perspiciatis delectus atque autem! Voluptatum tenetur beatae unde
+                    aperiam, repellat expedita consequatur! Officiis id consequatur atque doloremque!</p>
+                <p class="mt-4 text-gray-600  dark:text-slate-50"> Nobis minus voluptatibus pariatur dignissimos libero quaerat iure
+                    expedita at? Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti consequuntur suscipit
+                    saepe aliquam dolorem facere. Impedit quam repellendus optio cumque deserunt? Velit nemo quia ipsa
+                    consequatur autem harum, aperiam numquam. Asperiores nemo possimus nesciunt dicta veniam aspernatur
+                    quam mollitia.</p>
+            </div>
+            <div class="mt-7">
+                <h2 class="text-xl text-gray-900 font-bold md:text-xl  dark:text-white">Related Advisories </h2>
+                <p class="mt-6 text-gray-600  dark:text-slate-50">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum omnis
+                    voluptatem accusantium nemo perspiciatis delectus atque autem! Voluptatum tenetur beatae unde
+                    aperiam, repellat expedita consequatur! Officiis id consequatur atque doloremque!</p>
+                <p class="mt-4 text-gray-600  dark:text-slate-50"> Nobis minus voluptatibus pariatur dignissimos libero quaerat iure
+                    expedita at? Asperiores nemo possimus nesciunt dicta veniam aspernatur quam mollitia.</p>
+
+            </div>
+            <!-- component -->
+            <a class="relative block px-8 py-3 overflow-hidden border bg-white   dark:bg-slate-600  dark:border-slate-600 border-slate-100 rounded-lg my-10" href="">
+                <span
+                    class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"></span>
+
+                <div class="justify-between sm:flex">
+                    <div>
+                        <h5 class="text-xl font-bold text-slate-900 dark:text-slate-50">
+                            Latest Updates
+                        </h5>
+                    </div>
+                </div>
+                <div class="shadow-lg my-4 bg-slate-50 dark:bg-slate-500 px-6 py-2 border-s-4 border-teal-600">
+                    <div class="justify-between sm:flex  ">
+                        <div>
+                            <h5 class="text-lg font-bold text-slate-900 dark:text-white">
+                                Risk Alert
+                            </h5>
+                            <div class=" sm:pr-8">
+                                <p class="text-sm text-slate-500 dark:text-white">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident omnis enim nihil odio optio culpa. Nostrum tempora hic vero, laborum perspiciatis dolores repellat, repellendus doloremque quisquam possimus illum reprehenderit harum.
+                                </p>
+                                <dl class="flex mt-2">
+                                    <div class="flex flex-col-reverse">
+                                        <dt class="text-sm font-medium text-slate-600 dark:text-slate-100">Published</dt>
+                                        <dd class="text-xs text-slate-500 dark:text-slate-200">31st June, 2022</dd>
+                                    </div>
+                
+                                    <div class="flex flex-col-reverse ml-3 sm:ml-6">
+                                        <dt class="text-sm font-medium text-slate-600 dark:text-slate-100">Reading time</dt>
+                                        <dd class="text-xs text-slate-500 dark:text-slate-200">5 minutes</dd>
+                                    </div>
+                                </dl>
+                            </div>
+                        </div>
+    
+                        <!-- <div class="flex-shrink-0 hidden ml-3 sm:block">
+                            <img class="object-cover w-16 h-16 rounded-lg shadow-sm"
+                                src="https://github.com/creativetimofficial/argon-design-system/blob/master/assets/img/faces/team-2.jpg?raw=true"
+                                alt="" />
+                        </div> -->
+                    </div>
+                </div>
+            </a>
+        </div>
+
+
     </div>
 </div>
