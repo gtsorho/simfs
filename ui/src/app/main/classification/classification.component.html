@@ -64,12 +64,24 @@
                 <form>
                     <!-- Step 1 -->
                     <div *ngIf="step === 1" class="border-b border-gray-900/10 pb-12">
-                        <h2 class="text-base font-semibold leading-7 dark:text-white text-gray-900">Ecological Region &
+                        <h2 class="text-base font-semibold leading-7 mb-10 dark:text-white text-gray-900">Ecological Region &
                             Value Chain</h2>
                             <section id="">
                                 <!-- Region selection (only one region can be selected) -->
                                 <span *ngIf="stepEco == 1">
-                                  <h3 class="text-lg font-medium dark:text-white">Select your Region</h3>
+                                    <h3 class="text-lg font-medium dark:text-white">Select your Country & Region</h3>
+                                    <div class="mb-4 text-start dark:text-white">
+                                        <a *ngFor="let country of countries"
+                                            type="button"
+                                            class="my-2 mx-1 inline-block rounded-5 text-xs font-medium uppercase leading-normal shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-0 active:shadow-lg dark:text-neutral-200"
+                                            [ngClass]="{
+                                            'border-e-4  hover:border-neutral-300  dark:hover:border-neutral-500': selectedCountry !== country,
+                                            'border-teal-600 bg-teal-600 border-e-4 text-white': selectedCountry === country
+                                            }"
+                                            (click)="selectCountry(country)">
+                                            <img [src]="'../../../assets/countries/' + country.name + '.png'" width="40" alt="" srcset="">
+                                        </a>
+                                    </div>
                                   <div class="mb-4 text-start dark:text-white">
                                     <a *ngFor="let region of regionsOfGhana"
                                       type="button"
@@ -86,7 +98,7 @@
                               
                                 <!-- Crop selection (multiple crops can be selected) -->
                                 <span *ngIf="stepEco == 2">
-                                    <h3 class="text-lg font-medium dark:text-white">Select Crops:</h3>
+                                    <h3 class="text-lg font-medium dark:text-white">Select and enter Number of crops:</h3>
                                     <div class="mb-4 text-start dark:text-white">
                                       <a *ngFor="let crop of farmCrops"
                                         type="button"
@@ -101,7 +113,7 @@
                                           type="number"
                                           name="qty"
                                           min="0"
-                                          placeholder="5ha"
+                                          placeholder="5ac"
                                           class="w-[70px] inline h-[25px] ms-2 rounded-full border-0 py-1 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6"
                                           (input)="updateCropQuantity(crop, $event)">
                                       </a>
@@ -111,7 +123,7 @@
                               
                                 <!-- Farm animals selection (multiple animals can be selected) -->
                                 <span *ngIf="stepEco == 3">
-                                    <h3 class="text-lg font-medium dark:text-white">Select Farm Animals:</h3>
+                                    <h3 class="text-lg font-medium dark:text-white">Select and enter Number of adult animals:</h3>
                                     <div class="mb-4 text-start dark:text-white">
                                       <a *ngFor="let animal of farmAnimals"
                                         type="button"
@@ -126,7 +138,7 @@
                                           type="number"
                                           name="qty"
                                           min="0"
-                                          placeholder="5ha"
+                                          placeholder="5"
                                           class="w-[70px] inline h-[25px] ms-2 rounded-full border-0 py-1 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6"
                                           (input)="updateAnimalQuantity(animal, $event)">
                                       </a>
@@ -137,8 +149,7 @@
                     </div>
 
                     <div *ngIf="step === 2" class="border-b border-gray-900/10 pb-12 ">
-                        <h2 class="text-base font-semibold leading-7 dark:text-white text-gray-900">Farm Typology
-                            Selection</h2>
+                        <h2 class="text-base font-semibold leading-7 dark:text-white text-gray-900">Farm Typology</h2>
                         <p class="mt-1 text-sm leading-6 text-gray-600">Tell us more about your services.</p>
                         <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
@@ -150,17 +161,7 @@
                                 </div>
                             </div>
 
-                            <div class="sm:col-span-1">
-                                <label for="last-name"
-                                    class="block text-sm font-medium leading-6 dark:text-white text-gray-900">Livestock
-                                    diversity</label>
-                                <div class="mt-2">
-                                    <input type="text" name="last-name" id="last-name" autocomplete="family-name"
-                                        class="block w-full rounded-md border-0 py-1 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6">
-                                </div>
-                            </div>
-
-                            <div>
+                            <div *ngIf="selectedCrops.length > 0">
                                 <div class="sm:col-span-1" *ngFor="let crop of selectedCrops">
                                     <label for="email"
                                         class="block text-sm font-medium leading-6 dark:text-white text-gray-900">{{crop.name}} yield
@@ -171,41 +172,9 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="col-span-1">
-                                <label for="street-address"
-                                    class="block text-sm font-medium leading-6 dark:text-white text-gray-900">Parcel of
-                                    land</label>
-                                <div class="mt-2">
-                                    <input type="text" name="street-address" id="street-address"
-                                        autocomplete="street-address"
-                                        class="block w-full rounded-md border-0 py-1 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6">
-                                </div>
-                            </div>
-
-                                <div class="sm:col-span-1" >
-                                    <label for="city"
-                                        class="block text-sm font-medium leading-6 dark:text-white text-gray-900">Land size
-                                        (ha)</label>
-                                    <div class="mt-2">
-                                        <input type="text" name="city" id="city" autocomplete="address-level2"
-                                            class="block w-full rounded-md border-0 py-1 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6">
-                                    </div>
-                                </div>
-
-                            <div class="sm:col-span-1">
+                            <div class="sm:col-span-2">
                                 <label for="region"
-                                    class="block text-sm font-medium leading-6 dark:text-white text-gray-900">Livestock
-                                    holding (TLU)</label>
-                                <div class="mt-2">
-                                    <input type="text" name="region" id="region" autocomplete="address-level1"
-                                        class="block w-full rounded-md border-0 py-1 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6">
-                                </div>
-                            </div>
-                            <div class="sm:col-span-1">
-                                <label for="region"
-                                    class="block text-sm font-medium leading-6 dark:text-white text-gray-900">No. fruit
-                                    trees</label>
+                                    class="block text-sm font-medium leading-6 dark:text-white text-gray-900">No trees of economic value</label>
                                 <div class="mt-2">
                                     <input type="text" name="region" id="region" autocomplete="address-level1"
                                         class="block w-full rounded-md border-0 py-1 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6">
@@ -321,20 +290,32 @@
             <!-- Image Section -->
     <div class="image-container flex flex-col sm:flex-row overflow-hidden  w-full h-96 sm:h-64">
         <!-- Image 1 -->
-        <div class="skewed w-full sm:w-1/3 h-1/3 sm:h-full">
-          <img src="../../../assets/1.jpg"  class="w-full h-full object-cover">
+        <div class="skewed w-full sm:w-1/4 h-1/4 sm:h-full">
+          <img src="../../../assets/4.jpg"  class="w-full h-full object-cover">
+          <div class="absolute inset-0 flex items-center justify-center text-white text-xl sm:text-md font-semibold">
+            <span class="transform skewX(10deg) t  px-3 py-1 bg-[#4755698a] w-[min-content] rounded-md">Crop - Small Rumiminant</span>
+          </div>
         </div>
         <!-- Image 2 with text overlay -->
-        <div class="skewed w-full sm:w-1/3 h-1/3 sm:h-full relative">
+        <div class="skewed w-full sm:w-1/4 h-1/4 sm:h-full relative">
           <img src="../../../assets/2.jpg"  class="w-full h-full object-cover">
-          <div class="absolute inset-0 flex items-center justify-center text-white text-xl sm:text-3xl font-semibold">
-            <span class="transform skewX(10deg)">MFS <br> - Farm Lift</span>
+          <div class="absolute inset-0 flex items-center justify-center text-white text-xl sm:text-md font-semibold">
+            <span class="transform skewX(10deg) t  px-3 py-1 bg-[#4755698a] w-[min-content] rounded-md">Crop – Poultry</span>
           </div>
         </div>
         <!-- Image 3 -->
-        <div class="skewed w-full sm:w-1/3 h-1/3 sm:h-full">
+        <div class="skewed w-full sm:w-1/4 h-1/4 sm:h-full">
           <img src="../../../assets/3.jpg"  class="w-full h-full object-cover">
+          <div class="absolute inset-0 flex items-center justify-center text-white text-xl sm:text-md font-semibold">
+            <span class="transform skewX(10deg) t  px-3 py-1 bg-[#4755698a] w-[min-content] rounded-md">Crop - Cattle</span>
+          </div>
         </div>
+        <div class="skewed w-full sm:w-1/4 h-1/4 sm:h-full">
+            <img src="../../../assets/5.jpg"  class="w-full h-full object-cover">
+            <div class="absolute inset-0 flex items-center justify-center text-white text-xl sm:text-md font-semibold">
+                <span class="transform skewX(10deg) t  px-3 py-1 bg-[#4755698a] w-[min-content] rounded-md">Crop - Monogastric</span>
+              </div>
+          </div>
     </div>
     </div>
 </div>

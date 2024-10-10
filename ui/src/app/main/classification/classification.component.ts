@@ -17,6 +17,7 @@ export class ClassificationComponent {
   isLoader: boolean = false
 
   selectedRegion: any = null;
+  selectedCountry: any = null;
   selectedCrops: any[] = [];
   selectedAnimals: any[] = [];
 
@@ -24,6 +25,14 @@ export class ClassificationComponent {
     region: '',
     valueChain: ''
   };
+
+  countries:any = [
+    { id: 1, name: "ghana" },
+    { id: 2, name: "mali" },
+    { id: 3, name: "malawi" },
+    { id: 4, name: "zambia" },
+    { id: 5, name: "ethiopia" },
+  ];
 
   regionsOfGhana: any = [
     { id: 1, name: "Ahafo" },
@@ -117,6 +126,9 @@ export class ClassificationComponent {
 
   selectRegion(region: any) {
     this.selectedRegion = region;
+  }
+  selectCountry(country: any) {
+    this.selectedCountry = country;
   }
 
   toggleCropSelection(crop: any) {
