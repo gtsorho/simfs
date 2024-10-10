@@ -75,11 +75,13 @@
                                             type="button"
                                             class="my-2 mx-1 inline-block rounded-5 text-xs font-medium uppercase leading-normal shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-0 active:shadow-lg dark:text-neutral-200"
                                             [ngClass]="{
-                                            'border-e-4  hover:border-neutral-300  dark:hover:border-neutral-500': selectedCountry !== country,
-                                            'border-teal-600 bg-teal-600 border-e-4 text-white': selectedCountry === country
+                                            ' hover:border-neutral-300  dark:hover:border-neutral-500': selectedCountry !== country,
+                                            'border-teal-600  text-white': selectedCountry === country
                                             }"
                                             (click)="selectCountry(country)">
-                                            <img [src]="'../../../assets/countries/' + country.name + '.png'" width="40" alt="" srcset="">
+                                            <img [src]="'../../../assets/countries/' + country.name + '.png'" [ngClass]="{
+                                                'grayscale': selectedCountry !== country,'': selectedCountry === country
+                                                }" width="40" alt="" srcset="">
                                         </a>
                                     </div>
                                   <div class="mb-4 text-start dark:text-white">

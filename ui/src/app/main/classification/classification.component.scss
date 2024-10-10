@@ -21,3 +21,12 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+.grayscale {
+  filter: grayscale(70%); 
+}
+
+/* Remove grayscale on selected country's image */
+.border-teal-600.bg-teal-600 .country-image {
+  filter: grayscale(0); /* Removes grayscale filter */
+}
