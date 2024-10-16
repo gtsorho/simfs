@@ -1,6 +1,6 @@
 <header>
     <input type="checkbox" name="hbr" id="hbr" class="hbr peer" hidden aria-hidden="true">
-    <nav class="fixed z-20 w-full bg-white/90 dark:bg-gray-900/80 backdrop-blur navbar shadow-2xl shadow-gray-600/5 border-b border-gray-100 dark:border-gray-800 peer-checked:navbar-active dark:shadow-none">
+    <nav class="fixed z-20  w-full bg-slate-50/90 dark:bg-gray-900/80 backdrop-blur navbar shadow-2xl shadow-gray-600/5 border-b border-gray-100 dark:border-gray-800 peer-checked:navbar-active dark:shadow-none">
         <div class="xl:container m-auto px-6 md:px-12 lg:px-6">
             <div class="flex flex-wrap items-center justify-between gap-6 md:py-3 md:gap-0 lg:py-5">
                 <div class="w-full items-center flex justify-between lg:w-auto">
@@ -29,12 +29,17 @@
                     <div class="text-gray-600 dark:text-gray-300 lg:pr-4">
                         <ul class="space-y-6 tracking-wide font-medium text-base lg:text-sm lg:flex lg:space-y-0">
                             <li>
-                                <a routerLink="/" class="block md:px-4 transition hover:text-primary dark:hover:text-primaryLight">
+                                <a routerLink="/" class="block md:px-4 transition font-bold hover:text-slate-500 dark:hover:text-slate-200">
                                     <span>Home</span>
                                 </a>
                             </li>
                             <li>
-                                <a (click)="toggleDarkMode()" class="block md:px-4 transition hover:text-primary dark:hover:text-primaryLight">
+                                <a routerLink="/signin" class="block md:px-4 transition font-bold hover:text-slate-500 dark:hover:text-slate-200">
+                                    <span>SignIn</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a (click)="toggleDarkMode()" class="block md:px-4 transition hover:text-slate-500 dark:hover:text-slate-200">
                                     <i class="fa-solid fa-moon" *ngIf="!isDarkMode"></i>
                                     <i class="fa-solid fa-sun" *ngIf="isDarkMode"></i>
                                 </a>
