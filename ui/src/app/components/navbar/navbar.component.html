@@ -68,6 +68,16 @@
                                 </a>
                             </li>
                             <li>
+                                <a routerLink="/signin"  class="block md:px-4 transition hover:text-primary dark:hover:text-primaryLight">
+                                    <span>SignIn</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a routerLink="/statistics"  class="block md:px-4 transition hover:text-primary dark:hover:text-primaryLight">
+                                    <span>Statistics</span>
+                                </a>
+                            </li>
+                            <li>
                                 <a (click)="toggleDarkMode()" class="block md:px-4 transition hover:text-primary dark:hover:text-primaryLight">
                                     <i class="fa-solid fa-moon" *ngIf="!isDarkMode"></i>
                                     <i class="fa-solid fa-sun" *ngIf="isDarkMode"></i>
