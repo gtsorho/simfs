@@ -7,14 +7,14 @@
           <div class="text-blueGray-400 text-center mb-3 font-bold">
             <h6 class="text-3xl">Sign In</h6>
           </div>
-          <form>
+          <form (submit)="centerLogin()">
             <div class="relative w-full mb-3">
-              <label class="block  text-sm font-medium leading-6 dark:text-white text-gray-900 mb-1" for="grid-password">Email</label>
-              <input type="email" class="border-0 px-3 py-2 placeholder-blueGray-300 text-blueGray-600 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white rounded text-sm  focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Email">
+              <label class="block  text-sm font-medium leading-6 dark:text-white text-gray-900 mb-1" for="grid-password">Username</label>
+              <input type="email" name="username" [(ngModel)]="username" class="border-0 px-3 py-2 placeholder-blueGray-300 text-blueGray-600 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white rounded text-sm  focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Email">
             </div>
             <div class="relative w-full mb-3">
               <label class="block  text-sm font-medium leading-6 dark:text-white text-gray-900 mb-1" for="grid-password">Password</label>
-              <input type="password" class="border-0 px-3 py-2 placeholder-blueGray-300 text-blueGray-600 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white rounded text-sm  focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Password">
+              <input type="password" name="password"  [(ngModel)]="password" class="border-0 px-3 py-2 placeholder-blueGray-300 text-blueGray-600 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white rounded text-sm  focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Password">
             </div>
             <div>
               <label class="inline-flex items-center cursor-pointer">
@@ -23,7 +23,7 @@
               </label>
             </div>
             <div class="text-center mt-6">
-              <button class="hover:bg-teal-500 bg-teal-600 text-white  text-sm font-bold uppercase px-6 py-1 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150" type="button"> Sign In </button>
+              <button  class="hover:bg-teal-500 bg-teal-600 text-white  text-sm font-bold uppercase px-6 py-1 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150" type="submit"> Sign In </button>
             </div>
           </form>
         </div>
