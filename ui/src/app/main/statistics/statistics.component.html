@@ -1,0 +1,181 @@
+<div class="min-h-screen bg-slate-50 py-20 dark:bg-slate-900">
+    <div class="p-4  ">
+      <div class="mt-12">
+        <div class="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
+          <div class="relative flex flex-col bg-clip-border rounded-sm bg-white dark:bg-gray-800 dark:text-white text-gray-700 shadow-md">
+            <div class="bg-clip-border mx-4 rounded-sm overflow-hidden bg-gradient-to-tr from-blue-600 to-blue-400 text-white shadow-blue-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
+                <img  width="50" src="../../../assets/group.png">
+            </div>
+            <div class="p-4 text-right">
+              <p class="block antialiased font-sans text-sm leading-normal font-bold text-blue-gray-600">Subscribed Farmers</p>
+              <h4 class="block antialiased tracking-wide font-sans text-2xl font-extrabold leading-snug text-blue-gray-900">530</h4>
+            </div>
+          </div>
+          <div class="relative flex flex-col bg-clip-border rounded-sm bg-white dark:bg-gray-800 dark:text-white text-gray-700 shadow-md">
+            <div class="bg-clip-border mx-4 rounded-sm overflow-hidden bg-gradient-to-tr from-pink-600 to-pink-400 text-white shadow-pink-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
+                <img  width="50" src="../../../assets/cow.png">
+            </div>
+            <div class="p-4 text-right">
+              <p class="block antialiased font-sans text-sm leading-normal font-bold text-blue-gray-600">Crop Large Ruminant Farmers</p>
+              <h4 class="block antialiased tracking-wide font-sans text-2xl font-extrabold leading-snug text-blue-gray-900">140</h4>
+            </div>
+          </div>
+          <div class="relative flex flex-col bg-clip-border rounded-sm bg-white dark:bg-gray-800 dark:text-white text-gray-700 shadow-md">
+            <div class="bg-clip-border mx-4 rounded-sm overflow-hidden bg-gradient-to-tr from-green-600 to-green-400 text-white shadow-green-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
+                <img  width="50" src="../../../assets/goat.png">
+            </div>
+            <div class="p-4 text-right">
+              <p class="block antialiased font-sans text-sm leading-normal font-bold text-blue-gray-600">Crop Small Ruminant Farmers</p>
+              <h4 class="block antialiased tracking-wide font-sans text-2xl font-extrabold leading-snug text-blue-gray-900">230</h4>
+            </div>
+          </div>
+          <div class="relative flex flex-col bg-clip-border rounded-sm bg-white dark:bg-gray-800 dark:text-white text-gray-700 shadow-md">
+            <div class="bg-clip-border mx-4 rounded-sm overflow-hidden bg-gradient-to-tr from-orange-600 to-orange-400 text-white shadow-orange-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
+                <img  width="50" src="../../../assets/chicken.png">
+            </div>
+            <div class="p-4 text-right">
+              <p class="block antialiased font-sans text-sm leading-normal font-bold text-blue-gray-600">Crop Poultry Farmers</p>
+              <h4 class="block antialiased tracking-wide font-sans text-2xl font-extrabold leading-snug text-blue-gray-900">160</h4>
+            </div>
+          </div>
+        </div>
+        
+        <div class="mb-4 grid grid-cols-1 gap-6 xl:grid-cols-3">
+          <div class="relative flex flex-col bg-clip-border rounded-sm bg-white dark:bg-gray-800 dark:text-white text-gray-700 shadow-md overflow-hidden xl:col-span-2">
+            <div class="relative bg-clip-border rounded-sm overflow-hidden bg-transparent text-gray-700 shadow-none m-0 flex items-center justify-between p-6">
+              <div class="dark:text-white text-gray-700">
+                <h6 class="block antialiased tracking-normal font-sans text-base font-semibold leading-relaxed text-blue-gray-900 mb-1 uppercase">Age & Gender Distribution</h6>
+                <!-- <p class="antialiased font-sans text-sm leading-normal flex items-center gap-1 font-normal text-blue-gray-600">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam, expedita minima est excepturi fugit quaerat molestias dolores rerum tempore, asperiores voluptate natus illo, maiores sunt quis obcaecati ut error quae!
+                </p> -->
+              </div>
+            </div>
+            <div class="p-6 overflow-x-scroll px-0 pt-0 pb-2 ">
+                <div id="chart" class="dark:text-white text-gray-700">
+                    <apx-chart
+                      [series]="chartOptions!.series!"
+                      [chart]="chartOptions!.chart!"
+                      [dataLabels]="chartOptions!.dataLabels!"
+                      [plotOptions]="chartOptions.plotOptions!"
+                      [yaxis]="chartOptions.yaxis!"
+                      [legend]="chartOptions.legend!"
+                      [fill]="chartOptions.fill!"
+                      [stroke]="chartOptions.stroke!"
+                      [tooltip]="chartOptions.tooltip!"
+                      [xaxis]="chartOptions.xaxis!"
+                    ></apx-chart>
+                  </div>
+                  
+            </div>
+          </div>
+          <div class="relative flex flex-col bg-clip-border rounded-sm bg-white dark:bg-gray-800 dark:text-white text-gray-700 shadow-md overflow-hidden xl:col-span-1">
+            <div class="relative bg-clip-border rounded-sm overflow-hidden bg-transparent text-gray-700 shadow-none m-0 flex items-center justify-between p-6">
+              <div class="dark:text-white text-gray-700">
+                <h6 class="block antialiased tracking-normal font-sans text-base font-semibold leading-relaxed text-blue-gray-900 mb-1 uppercase">Regional Statistics</h6>
+                <!-- <p class="antialiased font-sans text-sm leading-normal flex items-center gap-1 font-normal text-blue-gray-600">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti dolores minus aut voluptatibus repudiandae, earum nesciunt quibusdam impedit, aperiam esse cupiditate ullam omnis obcaecati autem quaerat, explicabo molestiae cum. Ex?
+                </p> -->
+              </div>
+            </div>
+            <div class="p-6 overflow-x-scroll px-0 pt-0 pb-2">
+                <div id="chart" >
+                    <apx-chart class=""
+                      [series]="PieChartOptions.non_series!"
+                      [chart]="PieChartOptions.chart!"
+                      [dataLabels]="PieChartOptions.dataLabels!"
+                      [plotOptions]="PieChartOptions.plotOptions!"
+                      [yaxis]="PieChartOptions.yaxis!"
+                      [legend]="PieChartOptions.legend!"
+                      [fill]="PieChartOptions.fill!"
+                      [stroke]="PieChartOptions.stroke!"
+                      [tooltip]="PieChartOptions.tooltip!"
+                      [xaxis]="PieChartOptions.xaxis!"
+                      [labels]="PieChartOptions.labels!"
+                    ></apx-chart>
+                  </div>
+            </div>
+          </div>
+          <div class="relative flex flex-col bg-clip-border rounded-sm bg-white dark:bg-gray-800 dark:text-white text-gray-700 shadow-md overflow-hidden xl:col-span-1">
+            <div class="relative bg-clip-border rounded-sm overflow-hidden bg-transparent text-gray-700 shadow-none m-0 flex items-center justify-between p-6">
+              <div class="dark:text-white text-gray-700">
+                <h6 class="block antialiased tracking-normal font-sans text-base font-semibold leading-relaxed text-blue-gray-900 mb-1">BREAKDOWN OF 609 FARMERS</h6>
+                <!-- <p class="antialiased font-sans text-sm leading-normal flex items-center gap-1 font-normal text-blue-gray-600">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore voluptates non odit sed corrupti sapiente mollitia quia, amet, quibusdam eius quis ab aliquid quos possimus nemo quidem architecto animi molestiae.
+                </p> -->
+              </div>
+            </div>
+            <div class="p-6 overflow-x-scroll px-0 pt-0 pb-2">
+                <div id="chart">
+                    <apx-chart
+                      [series]="treeChartOptions.series!"
+                      [chart]="treeChartOptions.chart!"
+                      [dataLabels]="treeChartOptions.dataLabels!"
+                      [plotOptions]="treeChartOptions.plotOptions!"
+                      [yaxis]="treeChartOptions.yaxis!"
+                      [legend]="treeChartOptions.legend!"
+                      [fill]="treeChartOptions.fill!"
+                      [stroke]="treeChartOptions.stroke!"
+                      [tooltip]="treeChartOptions.tooltip!"
+                      [xaxis]="treeChartOptions.xaxis!"
+                    ></apx-chart>
+                  </div>
+            </div>
+          </div>          
+          <div class="relative flex flex-col bg-clip-border rounded-sm bg-white dark:bg-gray-800 dark:text-white text-gray-700 shadow-md overflow-hidden xl:col-span-1">
+            <div class="relative bg-clip-border rounded-sm overflow-hidden bg-transparent text-gray-700 shadow-none m-0 flex items-center justify-between p-6">
+              <div class="dark:text-white text-gray-700">
+                <h6 class="block antialiased tracking-normal font-sans text-base font-semibold leading-relaxed text-blue-gray-900 mb-1 uppercase">Ownership of livestock</h6>
+                <!-- <p class="antialiased font-sans text-sm leading-normal flex items-center gap-1 font-normal text-blue-gray-600">
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laborum odio illo maiores cupiditate optio quas suscipit odit earum exercitationem, non aperiam iusto beatae provident culpa labore consequuntur ipsam iste? Perferendis.
+                </p> -->
+              </div>
+            </div>
+            <div class="p-6 overflow-x-scroll px-0 pt-0 pb-2">
+                <div id="chart">
+                    <apx-chart
+                      [series]="PieChartOptions2.non_series!"
+                      [chart]="PieChartOptions2.chart!"
+                      [dataLabels]="PieChartOptions2.dataLabels!"
+                      [plotOptions]="PieChartOptions2.plotOptions!"
+                      [yaxis]="PieChartOptions2.yaxis!"
+                      [legend]="PieChartOptions2.legend!"
+                      [fill]="PieChartOptions2.fill!"
+                      [stroke]="PieChartOptions2.stroke!"
+                      [tooltip]="PieChartOptions2.tooltip!"
+                      [xaxis]="PieChartOptions2.xaxis!"
+                      [labels]="PieChartOptions2.labels!"
+                    ></apx-chart>
+                  </div>
+            </div>
+          </div>
+          <div class="relative flex flex-col bg-clip-border rounded-sm bg-white dark:bg-gray-800 dark:text-white text-gray-700 shadow-md overflow-hidden xl:col-span-1">
+            <div class="relative bg-clip-border rounded-sm overflow-hidden bg-transparent text-gray-700 shadow-none m-0 flex items-center justify-between p-6">
+              <div class="dark:text-white text-gray-700">
+                <h6 class="block antialiased tracking-normal font-sans text-base font-semibold leading-relaxed text-blue-gray-900 mb-1">EDUCATION LEVEL OF FARMERS WITH FARM SIZE BETWEEN 5 – 10 ACRES</h6>
+                <!-- <p class="antialiased font-sans text-sm leading-normal flex items-center gap-1 font-normal text-blue-gray-600">
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis magnam enim consequuntur itaque earum consectetur, perferendis labore alias laudantium? Sint eos hic et distinctio quisquam quaerat illum vel explicabo maiores.
+                </p> -->
+              </div>
+            </div>
+            <div class="p-6 overflow-x-scroll px-0 pt-0 pb-2 ">
+                <div id="chart" class="dark:text-white text-gray-700">
+                    <apx-chart
+                      [series]="horzChartOptions!.series!"
+                      [chart]="horzChartOptions!.chart!"
+                      [dataLabels]="horzChartOptions!.dataLabels!"
+                      [plotOptions]="horzChartOptions.plotOptions!"
+                      [yaxis]="horzChartOptions.yaxis!"
+                      [legend]="horzChartOptions.legend!"
+                      [fill]="horzChartOptions.fill!"
+                      [stroke]="horzChartOptions.stroke!"
+                      [tooltip]="horzChartOptions.tooltip!"
+                      [xaxis]="horzChartOptions.xaxis!"
+                    ></apx-chart>
+                  </div>
+                  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
