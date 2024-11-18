@@ -1,0 +1,238 @@
+<!-- component -->
+<div class="p-5 text-xs dark:bg-gray-900 min-h-screen flex items-center pt-20" *ngIf="!isLoader && !isMfsResult">
+    <div class="mt-8 p-4 w-full">
+        <div class="flex items-center justify-center w-full">
+            <div class="bg-slate-100 dark:bg-gray-800 shadow-md rounded-lg px-8 w-full lg:w-3/4 py-6">
+
+                <!-- Step Indicators -->
+                <div class="mx-4 p-4 mb-10">
+                    <div class="flex items-center mx-auto max-w-md">
+
+                        <!-- Step 1 Indicator -->
+                        <div class="flex items-center text-teal-600 relative">
+                            <i
+                                class="absolute -ml-12 text-center -mt-16 w-32 text-lg text-teal-600 fa-brands fa-pagelines"></i>
+                            <div class="rounded-full transition duration-500 ease-in-out h-8 w-8 py-1.5 px-2.5 border-2"
+                                [ngClass]="{'bg-teal-600 text-white': step >= 1, 'border-teal-600': step >= 1}">
+                                <i class="mx-auto fa-solid fa-check text-md"></i>
+                            </div>
+                            <div
+                                class="absolute top-0 -ml-12 text-center mt-9 w-32 text-xs font-medium uppercase text-teal-600">
+                                Zone
+                            </div>
+                        </div>
+
+                        <!-- Divider -->
+                        <div class="flex-auto border-t-2 transition duration-500 ease-in-out"
+                            [ngClass]="{'border-teal-600': step > 1, 'border-gray-300': step < 1}"></div>
+
+                        <!-- Step 2 Indicator -->
+                        <div class="flex items-center text-teal-600 relative">
+                            <i
+                                class="absolute -ml-12 text-center -mt-16 w-32 text-lg text-teal-600 fa-regular fa-lightbulb"></i>
+                            <div class="rounded-full transition duration-500 ease-in-out h-8 w-8 py-1.5 px-2.5 border-2"
+                                [ngClass]="{'bg-teal-600 text-white': step >= 2, 'border-teal-600': step >= 2}">
+                                <i class="mx-auto fa-solid fa-check text-md"></i>
+                            </div>
+                            <div
+                                class="absolute top-0 -ml-12 text-center mt-9 w-32 text-xs font-medium uppercase text-teal-600">
+                                Package
+                            </div>
+                        </div>
+
+                        <!-- Divider -->
+                        <div class="flex-auto border-t-2 transition duration-500 ease-in-out"
+                            [ngClass]="{'border-teal-600': step > 2, 'border-gray-300': step < 2}"></div>
+
+                        <!-- Step 3 Indicator -->
+                        <div class="flex items-center text-teal-600 relative">
+                            <i
+                                class="absolute -ml-11 text-center -mt-16 w-32 text-lg text-teal-600 fa-solid fa-person-digging"></i>
+                            <div class="rounded-full transition duration-500 ease-in-out h-8 w-8 py-1.5 px-2.5 border-2"
+                                [ngClass]="{'bg-teal-600 text-white': step == 3, 'border-teal-600': step == 3}">
+                                <i class="mx-auto fa-solid fa-check text-md"></i>
+                            </div>
+                            <div
+                                class="absolute top-0 -ml-12 text-center mt-9 w-32 text-xs font-medium uppercase text-teal-600">
+                                Nuggets
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step Forms -->
+                <form>
+                    <!-- Step 1 -->
+                    <div *ngIf="step === 1" class="border-b border-gray-900/10 pb-12">
+                        <h2 class="text-base font-semibold leading-7 mb-10 dark:text-white text-gray-900">Ecological Zone</h2>
+                            <section id="">
+                                <span>
+                                    <h3 class="text-lg font-medium dark:text-white">Select Region</h3>
+                                    <div class="mb-4 text-start dark:text-white">
+                                        <a *ngFor="let region of regionsOfGhana"
+                                            type="button"
+                                            class="my-2 mx-1 inline-block rounded-full px-4 pb-1 pt-1.5 cursor-pointer text-xs font-medium uppercase leading-normal shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-0 active:shadow-lg dark:text-neutral-200"
+                                            [ngClass]="{
+                                                'bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-600 dark:hover:bg-neutral-500 active:bg-neutral-400': selectedRegion !== region,
+                                                'bg-teal-600 text-white': selectedRegion === region
+                                            }"
+                                            (click)="selectRegion(region)">
+                                            {{ region.region }}
+                                        </a>
+                                    </div>
+                                  <div class="mb-4 text-start dark:text-white">
+                                    <a *ngFor="let district of districts"
+                                      type="button"
+                                      class="my-2 mx-1 inline-block rounded-full px-4 pb-1 pt-1.5 cursor-pointer text-xs font-medium uppercase leading-normal shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-0 active:shadow-lg dark:text-neutral-200"
+                                      [ngClass]="{
+                                        'bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-600 dark:hover:bg-neutral-500 active:bg-neutral-400': selectedDistrict !== district,
+                                        'bg-teal-600 text-white': selectedDistrict === district
+                                      }"
+                                      (click)="selectDistrict(district)">
+                                      {{ district.district }}
+                                    </a>
+                                    <p *ngIf="districts.length === 0" class="text-xs text-red-400 font-semibold">(0) sub districts found </p>
+                                  </div>
+                                </span>
+                              </section>
+                    </div>
+
+                    <div *ngIf="step === 2" class="border-b border-gray-900/10 pb-2 ">
+                        <div class="grid  w-full place-items-center overflow-x-scroll rounded-lg px-6 py-2 lg:overflow-visible">
+                            <div role="alert" class="relative block w-full text-base font-regular  shadow-md px-4 py-2 rounded-lg dark:bg-gray-900 bg-slate-200 text-white ">
+                                <div class=" mx-auto">
+                                    <p class="font-bold text-center text-gray-900 dark:text-gray-200">
+                                        Zone 
+                                        <span class="text-gray-900 dark:text-gray-200">
+                                            - {{selectedDistrict.Zone.zone}}
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 text-center  ">                    
+                            <i class="fa-solid fa-caret-down  text-gray-900 dark:text-gray-200 text-lg"></i>
+                        </div>
+                        
+                        <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 text-center  ">                    
+                            <div class="grid items-center systems justify-center max-w-4xl grid-cols-2 gap-4 mx-auto mt-2 md:grid-cols-4">
+                                <div 
+                                 *ngFor="let system of zoneSys" (click)="getActivities(system.id)" class="h-10 flex items-center justify-center px-2 relative overflow-hidden border rounded-sm font-black uppercase border-teal-600 bg-teal-600 text-white shadow-md transition-all before:content-[''] before:absolute before:right-0 before:top-0 before:h-12 before:w-6 before:translate-x-12 before:rotate-6 before:bg-white before:opacity-10 before:transition-transform before:duration-700 hover:shadow-teal-600 hover:before:-translate-x-40"
+                                    >
+                                  <p>{{system.name}}</p>
+                                </div>
+                              </div>
+                        </div>
+
+                        <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 text-center  ">     
+                            <i class="fa-solid fa-caret-down  text-gray-900 dark:text-gray-200 text-lg" *ngIf="activities.length > 0"></i>               
+                            <div class="grid items-center systems justify-center max-w-4xl grid-cols-2 gap-4 mx-auto mt-2 md:grid-cols-4">
+                                <button 
+                                 *ngFor="let activity of activities" class="relative flex h-[40px] rounded-sm px-2 items-center justify-center overflow-hidden bg-neutral-200 border border-neutral-400 hover:text-neutral-200 dark:border-neutral-400 dark:bg-neutral-600  dark:text-neutral-200 shadow-md transition-all before:absolute before:h-0 before:w-0 before:rounded-full before:bg-neutral-600 before:duration-500 before:ease-out hover:shadow-neutral-600 hover:before:h-56 hover:before:w-72"
+                                 [ngClass]="{
+                                    'bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-600 dark:hover:bg-neutral-500 active:bg-neutral-400': selectedActivity === activity,
+                                    'bg-neutral-600 text-white': selectedActivity === activity
+                                }"
+                                 (click)="selectActivity(activity)"> 
+                                    <span class="relative z-10"><p>{{activity.name}}</p></span>
+                                  </button>
+                              </div>
+                        </div>
+
+                    </div>
+
+                    <div *ngIf="step === 3" class="border-b border-gray-900/10 pb-12">
+                        <h2 class="text-base font-semibold leading-7 dark:text-white text-gray-900">Available Messages</h2>
+                        <!-- <div class="grid items-center systems justify-center max-w-4xl grid-cols-2 gap-4 mx-auto mt-2 md:grid-cols-4">
+                            <div class="max-w-[300px] w-full p-2 bg-white border rounded-lg shadow-lg"  *ngFor="let nugget of nuggets"  >
+                                <div class="flex justify-between items-start">
+                                    <h3 class="text-xl font-semibold">{{nugget.title}}</h3>
+                                    <button class="p-1 text-gray-500 transition-colors rounded hover:bg-gray-100 focus:outline-none">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                                        </svg>
+                                    </button>
+                                </div>
+                                <p class="mt-4 text-gray-600">{{ nugget.msg.length > 150 ? (nugget.msg | slice:0:150) + '...' : nugget.msg}}</p>
+                                <div class="flex items-center mt-6">
+                                    <span class="text-2xl font-bold h-8">{{nugget.msg.length}}</span>
+                                    <span class="ml-1 text-sm text-gray-600">/ 255</span>
+                                    <button class="ml-auto px-5 py-2 text-sm font-medium text-white bg-teal-600 border border-teal-600 rounded hover:bg-teal-700 hover:border-teal-700">
+                                       Send
+                                    </button>
+                                </div>
+                            </div>
+                          </div>                                   -->
+
+                         <app-slider [zone]="selectedDistrict.Zone" [nuggets]="nuggets" ></app-slider>
+                    </div>
+                </form>
+
+                <div class=" p-2 mt-4">
+                    <div class="flex" *ngIf="step >= 1">
+                        <button (click)="previousStep()"
+                            class="hover:scale-110 focus:outline-none px-3 py-1 rounded font-bold cursor-pointer hover:bg-gray-200 bg-gray-100 text-gray-700 border"
+                            [disabled]="step === 1">Previous</button>
+                        <div class="flex-auto flex flex-row-reverse" *ngIf="step < 3">
+                            <button (click)="nextStep()"
+                                [disabled]="!isStepCompleted(step)"
+                                class="ml-2 hover:scale-110 focus:outline-none px-3 py-2 rounded font-bold cursor-pointer hover:bg-teal-600 bg-teal-600 text-teal-100
+                                disabled:bg-gray-400 disabled:text-white">Next</button>
+                        </div>
+                        <!-- <div class="flex-auto flex flex-row-reverse" *ngIf="step >= 3">
+                            <button (click)="submitForm()"
+                                [disabled]="!isStepCompleted(3)"
+                                class="ml-2 hover:scale-110 focus:outline-none px-3 py-2 rounded font-bold cursor-pointer hover:bg-teal-600 bg-teal-600 text-teal-100
+                                disabled:bg-gray-400 disabled:text-white">Finish</button>
+                        </div> -->
+                    </div >
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="p-5 text-xs dark:bg-gray-900 min-h-screen md:flex flex-col items-center justify-center pt-20 space-y-10" *ngIf="isMfsResult && !isLoader">
+    <!-- Content Section -->
+    <div class="h-96 w-full bg-gradient-to-tr from-teal-800 to-teal-200 rounded-lg md:flex items-center">
+        <div class="ml-5 sm:ml-20 w-full sm:w-80 my-10 text-center sm:text-left">
+            <h2 class="text-white text-3xl sm:text-4xl">COMPLETED</h2>
+            <p class="text-indigo-100 mt-4 capitalize font-thin tracking-wider leading-7">You  have successfully completed the MFS aggregation form. Click the Link below to view Advisories</p>
+
+            <a href="#" routerLink="/info" class="uppercase inline-block mt-8 text-sm bg-white py-2 px-4 rounded font-semibold hover:bg-indigo-100">View Classifications</a>
+        </div>
+            <!-- Image Section -->
+    <div class="image-container flex flex-col sm:flex-row overflow-hidden  w-full h-96 sm:h-64">
+        <!-- Image 1 -->
+        <div class="skewed w-full sm:w-1/4 h-1/4 sm:h-full">
+          <img src="../../../assets/4.jpg"  class="w-full h-full object-cover">
+          <div class="absolute inset-0 flex items-center justify-center text-white text-xl sm:text-md font-semibold">
+            <span class="transform skewX(10deg) t  px-3 py-1 bg-[#4755698a] w-[min-content] rounded-md">Crop - Small Rumiminant</span>
+          </div>
+        </div>
+        <!-- Image 2 with text overlay -->
+        <div class="skewed w-full sm:w-1/4 h-1/4 sm:h-full relative">
+          <img src="../../../assets/2.jpg"  class="w-full h-full object-cover">
+          <div class="absolute inset-0 flex items-center justify-center text-white text-xl sm:text-md font-semibold">
+            <span class="transform skewX(10deg) t  px-3 py-1 bg-[#4755698a] w-[min-content] rounded-md">Crop – Poultry</span>
+          </div>
+        </div>
+        <!-- Image 3 -->
+        <div class="skewed w-full sm:w-1/4 h-1/4 sm:h-full">
+          <img src="../../../assets/3.jpg"  class="w-full h-full object-cover">
+          <div class="absolute inset-0 flex items-center justify-center text-white text-xl sm:text-md font-semibold">
+            <span class="transform skewX(10deg) t  px-3 py-1 bg-[#4755698a] w-[min-content] rounded-md">Crop - Cattle</span>
+          </div>
+        </div>
+        <div class="skewed w-full sm:w-1/4 h-1/4 sm:h-full">
+            <img src="../../../assets/5.jpg"  class="w-full h-full object-cover">
+            <div class="absolute inset-0 flex items-center justify-center text-white text-xl sm:text-md font-semibold">
+                <span class="transform skewX(10deg) t  px-3 py-1 bg-[#4755698a] w-[min-content] rounded-md">Crop - Monogastric</span>
+              </div>
+          </div>
+    </div>
+    </div>
+</div>
+
+<div class=" min-h-screen flex items-center justify-center" *ngIf="isLoader">
+    <app-loader></app-loader>
+</div>

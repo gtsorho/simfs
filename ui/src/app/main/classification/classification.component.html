@@ -73,7 +73,7 @@
                                     <div class="mb-4 text-start dark:text-white">
                                         <a *ngFor="let country of countries"
                                             type="button"
-                                            class="my-2 mx-1 inline-block rounded-5 text-xs font-medium uppercase leading-normal shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-0 active:shadow-lg dark:text-neutral-200"
+                                            class="my-2 mx-1 inline-block cursor-pointer rounded-5 text-xs font-medium uppercase leading-normal shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-0 active:shadow-lg dark:text-neutral-200"
                                             [ngClass]="{
                                             ' hover:border-neutral-300  dark:hover:border-neutral-500': selectedCountry !== country,
                                             'border-teal-600  text-white': selectedCountry === country
@@ -87,7 +87,7 @@
                                   <div class="mb-4 text-start dark:text-white">
                                     <a *ngFor="let region of regionsOfGhana"
                                       type="button"
-                                      class="my-2 mx-1 inline-block rounded-full px-4 pb-1 pt-1.5 text-xs font-medium uppercase leading-normal shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-0 active:shadow-lg dark:text-neutral-200"
+                                      class="my-2 mx-1 inline-block rounded-full px-4 pb-1 pt-1.5 cursor-pointer text-xs font-medium uppercase leading-normal shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-0 active:shadow-lg dark:text-neutral-200"
                                       [ngClass]="{
                                         'bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-600 dark:hover:bg-neutral-500 active:bg-neutral-400': selectedRegion !== region,
                                         'bg-teal-600 text-white': selectedRegion === region
@@ -95,6 +95,7 @@
                                       (click)="selectRegion(region)">
                                       {{ region.name }}
                                     </a>
+                                    <p *ngIf="regionsOfGhana.length === 0" class="text-xs text-red-400 font-semibold">(0) sub regions found </p>
                                   </div>
                                 </span>
                               
@@ -104,14 +105,15 @@
                                     <div class="mb-4 text-start dark:text-white">
                                       <a *ngFor="let crop of farmCrops"
                                         type="button"
-                                        class="my-2 mx-1 inline-block rounded-full px-4 pb-1 pt-1.5 text-xs font-medium uppercase leading-normal shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-0 active:shadow-lg dark:text-neutral-200"
+                                        class="my-2 mx-1 inline-block rounded-full px-4 cursor-pointer pb-1 pt-1.5 text-xs font-medium uppercase leading-normal shadow-md transition duration-150 ease-in-out focus:outline-none focus:ring-0 active:shadow-lg dark:text-neutral-200"
                                         [ngClass]="{
                                           'bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-600 dark:hover:bg-neutral-500 active:bg-neutral-400': !isCropSelected(crop),
                                           'bg-teal-600 text-white': isCropSelected(crop)
                                         }"
                                         >
                                         <p class="inline" (click)="toggleCropSelection(crop)">{{ crop.name }}</p>
-                                        <input *ngIf="isCropSelected(crop)" [(ngModel)]="crop.quantities"
+                                        <input *ngIf="isCropSelected(crop)" 
+                                        [value]="selectedCropQuantities[crop.id] " 
                                           type="number"
                                           name="qty"
                                           min="0"
@@ -135,8 +137,9 @@
                                           'bg-teal-600 text-white': isAnimalSelected(animal)
                                         }"
                                         >
-                                        <p class="inline" (click)="toggleAnimalSelection(animal)">{{ animal.name }}</p>
-                                        <input *ngIf="isAnimalSelected(animal)" [(ngModel)]="animal.quantities"
+                                        <p class="inline" (click)="toggleAnimalSelection(animal)">{{ animal.name  }}</p>
+                                        <input *ngIf="isAnimalSelected(animal)" 
+                                          [value]="selectedAnimalQuantities[animal.id]" 
                                           type="number"
                                           name="qty"
                                           min="0"
@@ -159,7 +162,7 @@
                                 <label for="first-name"
                                     class="block text-sm font-medium leading-6 dark:text-white text-gray-900">Household size</label>
                                 <div class="mt-2">
-                                    <input type="text" name="first-name" id="first-name" autocomplete="given-name"  class="block w-full rounded-md border-0 py-1 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6">
+                                    <input type="text" name="homeSize" id="first-name" autocomplete="given-name" [(ngModel)]="household_size"  class="block w-full rounded-md border-0 py-1 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
 
@@ -169,7 +172,7 @@
                                         class="block text-sm font-medium leading-6 dark:text-white text-gray-900">{{crop.name}} yield
                                         (t/ha)</label>
                                     <div class="mt-2">
-                                        <input id="email" name="email" type="text" autocomplete="email"
+                                        <input id="email" name="email" type="text" autocomplete="email"  [(ngModel)]="crop.yield"
                                             class="block w-full rounded-md border-0 py-1 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6">
                                     </div>
                                 </div>
@@ -178,7 +181,7 @@
                                 <label for="region"
                                     class="block text-sm font-medium leading-6 dark:text-white text-gray-900">No trees of economic value</label>
                                 <div class="mt-2">
-                                    <input type="text" name="region" id="region" autocomplete="address-level1"
+                                    <input type="text" name="region" id="region" autocomplete="address-level1"  [(ngModel)]="no_economic_trees"
                                         class="block w-full rounded-md border-0 py-1 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
@@ -188,7 +191,7 @@
                                     class="block text-sm font-medium leading-6 dark:text-white text-gray-900">No.
                                     trees</label>
                                 <div class="mt-2">
-                                    <input type="text" name="postal-code" id="postal-code" autocomplete="postal-code"
+                                    <input type="text" name="postal-code" id="postal-code" autocomplete="postal-code"  [(ngModel)]="no_trees"
                                         class="block w-full rounded-md border-0 py-1 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
@@ -205,7 +208,7 @@
                                 <label for="first-name"
                                     class="block text-sm font-medium leading-6 dark:text-white text-gray-900">Name</label>
                                 <div class="mt-2">
-                                    <input type="text" name="first-name" id="first-name" autocomplete="given-name"
+                                    <input type="text" name="first-name" id="first-name" autocomplete="name" [(ngModel)]="farmer.name"
                                         class="block w-full rounded-md border-0 py-1 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
@@ -215,7 +218,7 @@
                                     class="block text-sm font-medium leading-6 dark:text-white text-gray-900">Phone
                                     Number</label>
                                 <div class="mt-2">
-                                    <input type="text" name="last-name" id="last-name" autocomplete="family-name"
+                                    <input type="text" name="phone" id="last-name" autocomplete="family-name" [(ngModel)]="farmer.phone"
                                         class="block w-full rounded-md border-0 py-1 dark:text-white text-gray-900 shadow-sm ring-1 ring-inset dark:ring-gray-500 ring-gray-300 dark:bg-gray-700 bg-white px-2 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-300 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
@@ -231,7 +234,7 @@
                                             <div class="mt-0 space-y-6">
                                                 <div class="relative flex gap-x-3">
                                                     <div class="flex h-6 items-center">
-                                                        <input id="comments" name="comments" type="checkbox"
+                                                        <input id="comments" name="comments" type="checkbox" [(ngModel)]="farmer.notify"
                                                             class="h-4 w-4 rounded border-gray-300 text-teal-600 focus:ring-teal-600 checked:bg-teal-600 checked:border-teal-600">
                                                     </div>
                                                     <div class="text-sm leading-6">
@@ -258,8 +261,10 @@
                             class="hover:scale-110 focus:outline-none px-3 py-1 rounded font-bold cursor-pointer hover:bg-gray-200 bg-gray-100 text-gray-700 border"
                             [disabled]="stepEco === 1">Previous</button>
                         <div class="flex-auto flex flex-row-reverse" *ngIf="step < 3">
-                            <button (click)="nextStepEco()"
-                                class="ml-2 hover:scale-110 focus:outline-none px-3 py-2 rounded font-bold cursor-pointer hover:bg-teal-600 bg-teal-600 text-teal-100">Next</button>
+                            <button (click)="nextStepEco()" 
+                                class="ml-2 hover:scale-110 focus:outline-none px-3 py-2 rounded font-bold cursor-pointer hover:bg-teal-600 bg-teal-600 text-teal-100 disabled:bg-gray-400 disabled:text-white"
+                                [disabled]="!isEcoStepCompleted(stepEco)"
+                                >Next</button>
                         </div>
                     </div >
                     <div class="flex" *ngIf="step > 1">
@@ -268,11 +273,15 @@
                             [disabled]="step === 1">Previous</button>
                         <div class="flex-auto flex flex-row-reverse" *ngIf="step < 3">
                             <button (click)="nextStep()"
-                                class="ml-2 hover:scale-110 focus:outline-none px-3 py-2 rounded font-bold cursor-pointer hover:bg-teal-600 bg-teal-600 text-teal-100">Next</button>
+                                [disabled]="!isStepCompleted(step)"
+                                class="ml-2 hover:scale-110 focus:outline-none px-3 py-2 rounded font-bold cursor-pointer hover:bg-teal-600 bg-teal-600 text-teal-100
+                                disabled:bg-gray-400 disabled:text-white">Next</button>
                         </div>
                         <div class="flex-auto flex flex-row-reverse" *ngIf="step >= 3">
                             <button (click)="submitForm()"
-                                class="ml-2 hover:scale-110 focus:outline-none px-3 py-2 rounded font-bold cursor-pointer hover:bg-teal-600 bg-teal-600 text-teal-100">Finish</button>
+                                [disabled]="!isStepCompleted(3)"
+                                class="ml-2 hover:scale-110 focus:outline-none px-3 py-2 rounded font-bold cursor-pointer hover:bg-teal-600 bg-teal-600 text-teal-100
+                                disabled:bg-gray-400 disabled:text-white">Finish</button>
                         </div>
                     </div >
                 </div>

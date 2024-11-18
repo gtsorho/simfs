@@ -5,6 +5,17 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class LoaderService {
+  baseUrl() {
+    // return 'http://localhost:3000/api';
+    return 'https://verify.miphost.com/api';
+  }
+
+  aghubUrl() {
+    return 'https://aghub.miphost.com/api';
+  }
+
+  constructor( ) { }
+
   private darkMode = new BehaviorSubject<boolean>(false); 
   isDarkMode$ = this.darkMode.asObservable();
 

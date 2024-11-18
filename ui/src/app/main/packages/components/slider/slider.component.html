@@ -1,0 +1,72 @@
+<div 
+  class="flex items-center justify-center space-x-4 select-none" 
+  (mousedown)="startDrag($event)" 
+  (mousemove)="onDrag($event)" 
+  (mouseup)="endDrag()"
+  (mouseleave)="endDrag()"
+  (touchstart)="startDrag($event)" 
+  (touchmove)="onDrag($event)" 
+  (touchend)="endDrag()"
+>
+  <!-- Left Navigation -->
+
+  <!-- Slider Container with Three Divs -->
+  <div class="flex space-x-4">
+    <button class="p-2 bg-gray-200 rounded-full" (click)="prevItem()"><i class="fa-solid fa-caret-left"></i></button>
+    <div  class="p-4 bg-white/40 dark:text-slate-200 xl:w-[300px] h-[170px] cursor-grab  shadow-lg rounded-md" [ngClass]="{'border-2 border-teal-600': isFocused(0)}">
+      <div class="flex justify-between items-start">
+        <h2 class="text-xl font-bold">{{ getItem(0).title }}</h2>
+      </div>
+      <p class="mt-4 text-gray-600 dark:text-gray-200">{{ getItem(0).msg | slice:0:55 }}{{ getItem(0).msg.length > 55 ? '...' : '' }}</p>
+      <div class="flex items-center mt-6">
+          <span class="text-2xl font-bold h-8">{{ getItem(0).msg.length }}</span>
+          <span class="ml-1 text-sm text-gray-600 dark:text-gray-200">/ 255</span>
+          <button (click)="sendMsg(getItem(0).msg)" *ngIf="isFocused(0)" class="ml-auto px-5 py-1 text-sm font-medium text-white bg-teal-600 border border-teal-600 rounded hover:bg-teal-700 hover:border-teal-700">
+              Send
+          </button>
+      </div>
+    </div>
+
+    <div  class="p-4 bg-white/75 xl:w-[300px] h-[170px] cursor-grab   scale-y-110 shadow-lg rounded-md" [ngClass]="{'border-2 border-teal-600': isFocused(1)}">
+      <div class="flex justify-between items-start">
+        <h2 class="text-xl font-bold">{{ getItem(1).title }}</h2>
+      </div>
+
+      <div class="group relative inline-block">
+        <p class="mt-4 text-gray-600">
+          {{ getItem(1).msg | slice:0:55 }}{{ getItem(1).msg.length > 55 ? '...' : '' }}
+        </p>
+        <div class="absolute bottom-[calc(60%+0.2rem)] left-1/2 -translate-x-1/2 hidden group-hover:block bg-gray-600  dark:bg-gray-100 text-white dark:text-black text-xs px-4 py-1 rounded w-52">
+          {{getItem(1).msg}}
+          <svg class="absolute left-1/2 -translate-x-1/2 top-full h-2 w-4  text-gray-600 dark:text-gray-100" viewBox="0 0 255 255" xml:space="preserve">
+            <polygon class="fill-current" points="0,0 127.5,127.5 255,0" />
+          </svg>
+        </div>
+      </div>
+      
+      <div class="flex items-center mt-6">
+          <span class="text-2xl font-bold h-8">{{ getItem(1).msg.length }}</span>
+          <span class="ml-1 text-sm text-gray-600">/ 255</span>
+          <button (click)="sendMsg(getItem(1).msg)" *ngIf="isFocused(1)" class="ml-auto px-5 py-1 text-sm font-medium text-white bg-teal-600 border border-teal-600 rounded hover:bg-teal-700 hover:border-teal-700">
+              Send
+          </button>
+      </div>
+    </div>
+
+    <div  class="p-4 bg-white/40 xl:w-[300px] h-[170px] cursor-grab dark:text-slate-200  shadow-lg rounded-md" [ngClass]="{'border-2 border-teal-600': isFocused(2)}">
+      <div class="flex justify-between items-start">
+        <h2 class="text-xl font-bold">{{ getItem(2).title }}</h2>
+      </div>
+      <p class="mt-4 text-gray-600 dark:text-gray-200">{{ getItem(2).msg | slice:0:55 }}{{ getItem(2).msg.length > 55 ? '...' : '' }}</p>
+      <div class="flex items-center mt-6">
+          <span class="text-2xl font-bold h-8">{{ getItem(2).msg.length }}</span>
+          <span class="ml-1 text-sm text-gray-600 dark:text-gray-200">/ 255</span>
+          <button (click)="sendMsg(getItem(2).msg)" *ngIf="isFocused(2)" class="ml-auto px-5 py-1 text-sm font-medium text-white bg-teal-600 border border-teal-600 rounded hover:bg-teal-700 hover:border-teal-700">
+              Send
+          </button>
+      </div>
+    </div>
+
+  <!-- Right Navigation -->
+  <button class="p-2 bg-gray-200 rounded-full" (click)="nextItem()"><i class="fa-solid fa-caret-right"></i></button>
+</div>

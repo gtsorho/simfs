@@ -1,9 +1,12 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { ClassificationService } from '../classification/classification.service';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { LoaderComponent } from '../../components/loader/loader.component';
 import { RouterLink } from '@angular/router';
-import { ClassificationService } from './classification.service';
+import { LoaderComponent } from '../../components/loader/loader.component';
+import { PackagesService } from './packages.service';
+import { SliderComponent } from './components/slider/slider.component';
+
 
 interface farmer {
   id?: string;
@@ -12,39 +15,41 @@ interface farmer {
   notify:boolean;
 }
 
-
 @Component({
-  selector: 'app-classification',
+  selector: 'app-packages',
   standalone: true,
-  imports: [CommonModule, RouterLink, FormsModule, LoaderComponent],
-  templateUrl: './classification.component.html',
-  styleUrl: './classification.component.scss'
+  imports: [CommonModule, RouterLink, FormsModule, LoaderComponent, SliderComponent],
+  templateUrl: './packages.component.html',
+  styleUrl: './packages.component.scss'
 })
+export class PackagesComponent {
 
-
-export class ClassificationComponent {
-
-  constructor(private classificationService:ClassificationService){ }
+  constructor(private classificationService:ClassificationService, private packagesService:PackagesService){ }
 
   step: number = 1;
-  stepEco: number = 1;
   isMfsResult: boolean = false
   isLoader: boolean = false
 
   selectedRegion: any = null;
-  selectedCountry: any = null;
+  selectedDistrict: any = null;
+  selectedNugget: any = null;
   selectedCrops: any[] = [];
   selectedAnimals: any[] = [];
+  selectedActivity: any = null;
 
   form = {
     region: '',
     valueChain: ''
   };
 
-  countries:any = [];
+  districts:any = [];
+  zoneSys:any = [];
   farmCrops:any = [];
   farmAnimals:any = [];
   regionsOfGhana: any = [];
+  activities: any = [];
+  nuggets: any = [];
+
   
   selectedCropQuantities: { [key: number]: number } = {};
   selectedAnimalQuantities: { [key: number]: number } = {};
@@ -58,11 +63,9 @@ export class ClassificationComponent {
     phone:'',
     notify:false
   }
-
-
-  
+ 
   ngOnInit(){
-    this.getCountries()
+    this.getRegions()
     this.getAnimals()
     this.getCrops()
 
@@ -76,15 +79,39 @@ export class ClassificationComponent {
     });
   }
 
-  getCountries(){
-    this.classificationService.getCountries().subscribe((res)=>{
-      this.countries = res
+  getActivities(id:number){
+    this.packagesService.getActivities_per_System(id).subscribe((res)=>{
+      this.activities = res
     })
   }
 
-  getRegions(id:number){
-    this.classificationService.getRegions(id).subscribe((res)=>{
+  getNuggets(id:number){
+    this.packagesService.getNuggets_per_Activity(id).subscribe((res)=>{
+      this.nuggets = res
+      console.log(this.nuggets)
+    })
+  }
+
+  getDistricts(id:number){
+    this.packagesService.getDistricts(id).subscribe((res)=>{
+      this.districts = res
+    })
+  }
+
+  getZoneSys(id:number){
+    this.packagesService.getZoneSystems(id).subscribe((res)=>{
+      this.zoneSys = res
+    })
+  }
+
+  getRegions(){
+    this.packagesService.getRegions().subscribe((res)=>{
       this.regionsOfGhana = res
+    })
+  }
+  
+  getDistrict(id:number){
+    this.packagesService.getDistrict(id).subscribe((res)=>{
     })
   }
 
@@ -103,14 +130,14 @@ export class ClassificationComponent {
   
 
   submitForm() {
-    console.log(
-      {
-        farmer:this.farmer,
-        zone:[this.selectedCountry, this.selectedRegion],
-        valueChain:[this.selectedCrops,this.selectedAnimals, {no_economic_trees:this.no_economic_trees, no_trees:this.no_trees, household_size:this.household_size}]
+  //   console.log(
+  //     {
+  //       farmer:this.farmer,
+  //       zone:[this.selectedCountry, this.selectedRegion],
+  //       valueChain:[this.selectedCrops,this.selectedAnimals, {no_economic_trees:this.no_economic_trees, no_trees:this.no_trees, household_size:this.household_size}]
 
-      }
-  )
+  //     }
+  // )
 
     // this.isLoader = true
 
@@ -124,10 +151,20 @@ export class ClassificationComponent {
   // Item Selection *********************************************
   selectRegion(region: any) {
     this.selectedRegion = region;
+    this.getDistricts(region.id)
   }
-  selectCountry(country: any) {
-    this.selectedCountry = country;
-    this.getRegions(country.id)
+  selectDistrict(district: any) {
+    this.selectedDistrict = district;
+    this.getZoneSys(this.selectedDistrict.ZoneId)
+  }
+
+  selectActivity(activity: any) {
+    this.selectedActivity = activity;
+    this.getNuggets(this.selectedActivity.id)
+  }
+
+  selectNugget(nugget: any) {
+    this.selectedNugget = nugget;
   }
 
   toggleCropSelection(crop: any) {
@@ -184,62 +221,16 @@ export class ClassificationComponent {
     if (this.step > 1) {
       this.step--;
     }
-
-    if(this.step == 1){
-      this.stepEco = 1
-    }
   }
 
-  nextStepEco() {
-    if (this.stepEco <= 3) {
-      this.stepEco++;
-    }
 
-    if(this.stepEco == 4){
-      console.log(this.stepEco)
-      this.step = 2
-    }
-  }
-
-  previousStepEco() {
-    if (this.stepEco > 1) {
-      this.stepEco--;
-    }
-  }
-
-  isEcoStepCompleted(step: number): boolean {
-    switch (step) {
-      case 1:
-        return this.selectedCountry && this.selectedRegion;
-      case 2:
-        var arr:any = []
-        this.selectedCrops.map((crop)=>{
-          arr.push(crop.quantities)
-        })
-        return this.selectedCrops.length > 0  && arr.every((qty:number) => qty > 0)
-      case 3:
-        var arr:any = []
-        this.selectedAnimals.map((animals)=>{
-          arr.push(animals.quantities)
-        })        
-        return this.selectedAnimals.length > 0 && arr.every((qty:number) => qty > 0)
-      default:
-        return false;
-    }
-  }
 
   isStepCompleted(step: number): boolean {
     switch (step) {
+      case 1:
+        return this.selectedDistrict && this.selectedRegion;
       case 2:
-        var arr:any = []
-        this.selectedCrops.map((crop)=>{
-          arr.push(crop.yield)
-        })
-        return this.household_size > 0 
-        && this.selectedCrops.length > 0 
-        && arr.every((qty:number) => qty > 0) 
-        && this.no_economic_trees > 0 
-        && this.no_trees > 0;
+        return this.selectedActivity !== null
 
       case 3:
         return  (this.farmer.name?.trim() !== '') && 
@@ -250,4 +241,6 @@ export class ClassificationComponent {
     }
   }
 
+
 }
+
