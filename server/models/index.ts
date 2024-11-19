@@ -86,8 +86,8 @@ db.region.belongsTo(db.zone)
 db.zone.hasMany(db.district)
 db.district.belongsTo(db.zone);
 
-db.system.hasMany(db.activity)
-db.activity.belongsTo(db.system);
+db.system.belongsToMany(db.activity, { through: 'SystemActivities' });
+db.activity.belongsToMany(db.system, { through: 'SystemActivities' });
 
 db.activity.hasMany(db.nugget)
 db.nugget.belongsTo(db.activity);

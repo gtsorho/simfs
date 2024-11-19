@@ -38,7 +38,23 @@ export default {
 
     getActivitiesPerSystem: async (req: Request, res: Response) => {
         try {
-            const activities = await db.activity.findAll({where:{FarmSystemId:req.params.id}});
+            const activities = await db.activity.findAll({
+                include:[
+                    {
+                        model:db.system,
+                        where:{
+                            id: req.params.id
+                        },
+                        attributes: []
+                    }
+                ],
+                through: {
+                    model: db.SystemActivities,
+                    attributes: []
+                } 
+                
+                
+            });
             res.json(activities);
         } catch (error) {
             console.error(error);

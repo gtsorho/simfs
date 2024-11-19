@@ -6,18 +6,6 @@ const districtsModel = (sequelize: Sequelize) => {
       type: DataTypes.STRING(255),
       allowNull: false
     },
-    shape_length: {
-      type: DataTypes.FLOAT,
-      allowNull: true
-    },
-    shape_area: {
-      type: DataTypes.FLOAT,
-      allowNull: true
-    },
-    geometry: {
-      type: DataTypes.GEOMETRY,
-      allowNull: true
-    }
   });
 
   return Districts;

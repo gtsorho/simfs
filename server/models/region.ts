@@ -6,10 +6,6 @@ const regionModel = (sequelize: Sequelize) => {
       type: DataTypes.STRING(255),
       allowNull: false
     },
-    geometry: {
-      type: DataTypes.GEOMETRY,
-      allowNull: true
-    },
     capital: {
       type: DataTypes.STRING(255),
       allowNull: true
