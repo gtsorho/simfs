@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 export class LoaderService {
   baseUrl() {
     // return 'http://localhost:3000/api';
-    return 'https://verify.miphost.com/api';
+    return 'https://mfs.miphost.com/api';
   }
 
   aghubUrl() {
