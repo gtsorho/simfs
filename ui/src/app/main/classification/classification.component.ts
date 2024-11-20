@@ -103,21 +103,21 @@ export class ClassificationComponent {
   
 
   submitForm() {
-    console.log(
-      {
-        farmer:this.farmer,
-        zone:[this.selectedCountry, this.selectedRegion],
-        valueChain:[this.selectedCrops,this.selectedAnimals, {no_economic_trees:this.no_economic_trees, no_trees:this.no_trees, household_size:this.household_size}]
+    // console.log(
+    //   {
+    //     farmer:this.farmer,
+    //     zone:[this.selectedCountry, this.selectedRegion],
+    //     valueChain:[this.selectedCrops,this.selectedAnimals, {no_economic_trees:this.no_economic_trees, no_trees:this.no_trees, household_size:this.household_size}]
 
-      }
-  )
+    //   }
+    // )
 
-    // this.isLoader = true
+    this.isLoader = true
 
-    // setTimeout(() => {
-    //   this.isMfsResult = true
-    //   this.isLoader = false
-    // }, 2000);
+    setTimeout(() => {
+      this.isMfsResult = true
+      this.isLoader = false
+    }, 2000);
 
   }
 
