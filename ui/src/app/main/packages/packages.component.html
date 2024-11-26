@@ -67,7 +67,7 @@
                         <h2 class="text-base font-semibold leading-7 mb-10 dark:text-white text-gray-900">Ecological Zone</h2>
                             <section id="">
                                 <span>
-                                    <h3 class="text-lg font-medium dark:text-white">Select Region</h3>
+                                    <h3 class="text-md font-bold dark:text-white">Select Region</h3>
                                     <div class="mb-4 text-start dark:text-white">
                                         <a *ngFor="let region of regionsOfGhana"
                                             type="button"
@@ -80,6 +80,7 @@
                                             {{ region.region }}
                                         </a>
                                     </div>
+                                <h3 class="text-md font-bold dark:text-white" *ngIf="districts.length > 0">Select District</h3>
                                   <div class="mb-4 text-start dark:text-white">
                                     <a *ngFor="let district of districts"
                                       type="button"

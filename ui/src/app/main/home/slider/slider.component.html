@@ -1,0 +1,17 @@
+<c-carousel [animate]="false" transition="crossfade" >
+  <c-carousel-indicators></c-carousel-indicators>
+  <c-carousel-inner class="">
+    <c-carousel-item *ngFor="let slide of slides">
+      <img
+        alt="{{slide.title}}"
+        class="d-block w-100 rounded-sm shadow-lg h-[5in] object-cover"
+        loading="lazy"
+        src="{{slide.src}}"
+      />
+      <c-carousel-caption class="d-none d-md-block text-start bg-slate-400/50 rounded-sm p-8 shadow-md">
+        <p class=" font-black text-teal-900 text-2xl lg:text-4xl ">{{slide.title}}</p>
+        <p class="text-white font-normal text-ms">{{slide.subtitle}}</p>
+      </c-carousel-caption>
+    </c-carousel-item>
+  </c-carousel-inner>
+</c-carousel>
